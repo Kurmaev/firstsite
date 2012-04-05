@@ -1,6 +1,6 @@
 from django.db import models
 
-class News(models.Model):
+class Event(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField()
     category = models.CharField(max_length=10)
