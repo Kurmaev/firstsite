@@ -32,7 +32,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 SITE_ID = 1
 
@@ -110,6 +110,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/home/zerg/djcode/firstsite/template/',
 )
 
 INSTALLED_APPS = (
@@ -119,13 +120,24 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',    
+    'django.contrib.admin',
+    'registration',
+    'login_user',    
     'event',
     'south',
 
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
+AUTH_USER_EMAIL_UNIQUE = True
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'info@google.ru'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
