@@ -10,12 +10,12 @@ class Category(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField()   
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category)
     text = models.CharField(max_length=1024)
     picture = models.ImageField(upload_to='pic/', blank=True)
     
     def get_category(self):
-        return self.category.all()
+        return self.category.shortname
     get_category.short_description = 'category'
     
     def __unicode__(self):
