@@ -6,11 +6,24 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-
+from django.test.client import Client
 
 class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+    fixtures = ['login_user/test_login.xml']
+    def setUp(self):      
+        self.c = Client()
+
+    def test_not_existing(self):
+        response = self.c.post("/accounts/login/")
+        assert(response._request.user.is_anonymous())
+        response = self.c.post('/accounts/login/', {'username': 'john', 'password': 'smith'})
+        assert(response._request.user.is_anonymous())
+
+    def test_existing(self):
+        response = self.c.post("/accounts/login/")
+        assert(response._request.user.is_anonymous())
+        response = self.c.post('/accounts/login/', {'username': 'testUser', 'password': '123'})
+        print response
+        self.assertRedirects(response, "/")
+
+

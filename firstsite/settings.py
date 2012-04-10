@@ -170,6 +170,8 @@ LOGGING = {
     }
 }
 
+LOGIN_REDIRECT_URL = '/'
+
 try:
     from local_settings import *
 except:
