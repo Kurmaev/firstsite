@@ -1,18 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
     {% if user.username %}
-    Вы уже залогинены, {{ user.username}}!
+        Вы уже залогинены, {{ user.username}}!
     {% else %}
-        {{ state }}
-		<form action="" method="post">{% csrf_token %}
-			{% if next %}
-			<input type="hidden" name="next" value="{{ next }}" />
-			{% endif %}
-			username:
-			<input type="text" name="username" value="{{ username}}" /><br />
-			password:
-			<input type="password" name="password" value="" /><br />
-			<input type="submit" value="Log In" />
-		</form>
-	{% endif %}
+        <form action="" method="post">{% csrf_token %}
+        {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% endif %}
+        {{form.as_p}}
+        <input type="submit" value="Log In" />
+        </form>
+    {% endif %}
 {% endblock %}

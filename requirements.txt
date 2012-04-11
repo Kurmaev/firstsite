@@ -1,3 +1,4 @@
-django
-South
-django-registration
+django==1.4.0
+South==0.7.4
+django-registration==0.8.0
+PIL

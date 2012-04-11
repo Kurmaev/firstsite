@@ -9,21 +9,17 @@ from django.test import TestCase
 from django.test.client import Client
 
 class SimpleTest(TestCase):
-    fixtures = ['login_user/test_login.xml']
-    def setUp(self):      
-        self.c = Client()
-
+    fixtures = ['login_user/fixtures/test_login.xml']
     def test_not_existing(self):
-        response = self.c.post("/accounts/login/")
+        response = self.client.post("/accounts/login/")
         assert(response._request.user.is_anonymous())
-        response = self.c.post('/accounts/login/', {'username': 'john', 'password': 'smith'})
+        response = self.client.post('/accounts/login/', {'username': 'john', 'password': 'smith'})
         assert(response._request.user.is_anonymous())
 
     def test_existing(self):
-        response = self.c.post("/accounts/login/")
+        response = self.client.post("/accounts/login/")
         assert(response._request.user.is_anonymous())
-        response = self.c.post('/accounts/login/', {'username': 'testUser', 'password': '123'})
-        print response
+        response = self.client.post('/accounts/login/', {'username': 'testUser', 'password': '123'})
         self.assertRedirects(response, "/")
 
 
