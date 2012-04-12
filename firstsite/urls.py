@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^$', 'firstsite.views.home', name='home'),
 
-    (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login_user/login.html', 'redirect_field_name':'login_user/login_sucsess.html'}),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login_user/login.html',}),
 
     url(r'^accounts/register/$', 'registration.views.register', {'backend': 'registration.backends.default.DefaultBackend', 'form_class': RegistrationFormUniqueEmail}),
 
