@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
+from django.conf import settings
 
 from registration.forms import RegistrationFormUniqueEmail 
 
@@ -17,5 +18,5 @@ urlpatterns = patterns('',
 
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'login_user/logout.html'}),
     (r'^accounts/', include('registration.backends.default.urls')),
-
+    (r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
