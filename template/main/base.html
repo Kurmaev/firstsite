@@ -37,11 +37,12 @@
   <div class="row-fluid show-grid">
     <div class="span3">
         
-        <div class="hero-unit" style="float:right; margin-top:0;">
+        <!--<div class="hero-unit" style="float:right; margin-top:0;"> -->
+        <div class="hero-unit">
         Фильтр по категориям:<br>
         <a href="/">Все</a><br>
         <a href="/view/cinema/">Кино</a><br>
-        <a href="/view/treatre/">Театр</a><br>
+        <a href="/view/theatre/">Театр</a><br>
         </div>
     </div>
 
@@ -49,7 +50,12 @@
     {% block content %}{% endblock %}
     </div>
 
-    <div class="span3"><br></div>
+    <div class="span3">
+        <div class="hero-unit">
+        Для отладки<br>
+        </div>
+
+    </div>
 
   </div>
   <div class="hero-unit">Probe</div >

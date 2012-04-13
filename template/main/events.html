@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+    {% if list_events %}
+        <ul>
+        {% for event in list_events %}
+
+             <div class="block">
+            <h2>{{ event.name }}</h2>
+            <p><img src="/images/no_pic.jpeg" alt="" width="200" class="leftimg">
+            <strong>Дата: </strong> {{ event.date }} <br>
+            <strong>Описание: </strong>{{ event.text }}<br>
+            </p>
+            <br>
+            </div>
+        {% endfor %}
+        </ul>
+    {% else %}
+        Событий в этой категории нет! </br>
+    {% endif %}
+
+{% endblock %}
