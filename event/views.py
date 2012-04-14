@@ -16,3 +16,7 @@ def viewevents(request, sort, template_name='main/events.html'):
     else:
         list_events = ""
     return TemplateResponse(request,template_name, {'list_events':list_events})
+
+def viewall(request, template_name='main/events.html'):
+    list_events = Event.objects.order_by('date')[0:10]
+    return TemplateResponse(request,template_name, {'list_events':list_events})

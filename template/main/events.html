@@ -4,10 +4,16 @@
     {% if list_events %}
         <ul>
         {% for event in list_events %}
-
-             <div class="block">
+            <div class="row-fluid">
             <h2>{{ event.name }}</h2>
-            <p><img src="/images/no_pic.jpeg" alt="" width="200" class="leftimg">
+            <p>
+            {% if event.get_pic %}            
+                {% autoescape off %}
+                {{ event.get_pic }}
+                {% endautoescape %}
+            {% else %}
+                <img src="/images/no_pic.jpg" alt="" width="200" class="leftimg">
+            {% endif %}
             <strong>Дата: </strong> {{ event.date }} <br>
             <strong>Описание: </strong>{{ event.text }}<br>
             </p>

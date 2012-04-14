@@ -17,9 +17,9 @@ urlpatterns = patterns('',
     url(r'^accounts/register/$', 'registration.views.register', {'backend': 'registration.backends.default.DefaultBackend', 'form_class': RegistrationFormUniqueEmail}),
 
     url(r'^view/([a-z]{1,10})/$', 'event.views.viewevents', {'template_name': 'main/events.html',}),
-
+    url(r'^viewall/$', 'event.views.viewall', {'template_name': 'main/events.html',}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'login_user/logout.html'}),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    url(r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    url(r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_PIC}),
 )
