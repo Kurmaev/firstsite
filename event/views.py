@@ -2,19 +2,12 @@
 
 from django.template.response import TemplateResponse
 from event.models import Event, Category
+from django.shortcuts import get_object_or_404
 
 def viewevents(request, sort, template_name='main/events.html'):
-    try:
-        p = Category.objects.get(shortname=sort)
-    except Category.DoesNotExist:
-        id_category = 0
-    else:
-        id_category = p.id
-
-    if id_category:    
-        list_events = Event.objects.filter(category=id_category)
-    else:
-        list_events = ""
+    p = get_object_or_404(Category, shortname=sort)
+    id_category = p.id
+    list_events = Event.objects.filter(category=id_category)
     return TemplateResponse(request,template_name, {'list_events':list_events})
 
 def viewall(request, template_name='main/events.html'):
