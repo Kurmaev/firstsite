@@ -2,6 +2,7 @@ from django.db import models
 
 class Category(models.Model):
     shortname = models.CharField(max_length=10, unique=True)
+    rusname = models.CharField(max_length=10, unique=True)
     description = models.CharField(max_length=200)
 
     def __unicode__(self):

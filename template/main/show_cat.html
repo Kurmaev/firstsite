@@ -1,0 +1,7 @@
+
+{% load view_category %}
+{% for category in list_cat %}
+    <a href="/view/{{ category.shortname }}/">{{ category.rusname }}</a><br>
+{% endfor %}
+
+

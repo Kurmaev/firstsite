@@ -10,21 +10,21 @@
 <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
-        <a href="/" class="brand">Event's site</a>
+        <a href={% url home %} class="brand">Event's site</a>
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="/">Завтра</a></li>
-            <li><a href="/">На неделю</a></li>
-            <li><a href="/accounts/register/">Регистрация</a></li>
-            <li><a href="/">Добавить событие</a></li>
+            <li><a href={% url home %}>Завтра</a></li>
+            <li><a href={% url home %}>На неделю</a></li>
+            <li><a href={% url registration_unique_mail %}>Регистрация</a></li>
+            <li><a href={% url home %}>Добавить событие</a></li>
           </ul>
           <ul class="nav pull-right">
             <li class="divider-vertical"></li>
-            {% if user.username %}
-                <li><a href="/accounts/logout/">Logout</a></li>
+            {% if user.is_authenticated %}
+                <li> <a href={% url user_logout %}>Logout</a></li>
             {% else %}
-                <li><a href="/accounts/login/">Login</a></li>
+                <li> <a href={% url user_login %}>Login</a></li>
             {% endif %}
           </ul>
         </div><!-- /.nav-collapse -->
@@ -41,8 +41,8 @@
         <div class="hero-unit">
         Фильтр по категориям:<br>
         <a href="/viewall/">Все</a><br>
-        <a href="/view/cinema/">Кино</a><br>
-        <a href="/view/theatre/">Театр</a><br>
+        {% load view_category %}
+        {% show_category %}
         </div>
     </div>
 
