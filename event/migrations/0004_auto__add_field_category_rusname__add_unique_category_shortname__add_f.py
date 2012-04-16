@@ -16,12 +16,20 @@ class Migration(SchemaMigration):
         # Adding unique constraint on 'Category', fields ['shortname']
         db.create_unique('event_category', ['shortname'])
 
+        # Adding field 'Event.slug'
+        db.add_column('event_event', 'slug',
+                      self.gf('django.db.models.fields.SlugField')(default=0, max_length=100),
+                      keep_default=False)
+
     def backwards(self, orm):
         # Removing unique constraint on 'Category', fields ['shortname']
         db.delete_unique('event_category', ['shortname'])
 
         # Deleting field 'Category.rusname'
         db.delete_column('event_category', 'rusname')
+
+        # Deleting field 'Event.slug'
+        db.delete_column('event_event', 'slug')
 
     models = {
         'event.category': {
@@ -38,6 +46,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'picture': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100'}),
             'text': ('django.db.models.fields.CharField', [], {'max_length': '1024'})
         }
     }

@@ -5,12 +5,10 @@
         <ul>
         {% for event in list_events %}
             <div class="row-fluid">
-            <h2>{{ event.name }}</h2>
+            <h2><a href={% url view_more  event.slug  %}>{{ event.name }}</a></h2>
             <p>
-            {% if event.get_pic %}            
-                {% autoescape off %}
-                {{ event.get_pic }}
-                {% endautoescape %}
+            {% if event.picture %}
+                <img src="/{{ event.picture }}" alt="" width="200" class="leftimg">
             {% else %}
                 <img src="{{ STATIC_URL }}images/no_pic.jpg" alt="" width="200" class="leftimg">
             {% endif %}

@@ -1,4 +1,5 @@
 from django.db import models
+from pytils.translit import slugify
 
 class Category(models.Model):
     shortname = models.CharField(max_length=10, unique=True)
@@ -14,19 +15,18 @@ class Event(models.Model):
     category = models.ForeignKey(Category)
     text = models.CharField(max_length=1024)
     picture = models.ImageField(upload_to='images/', blank=True)
-    
+    slug = models.SlugField(max_length=100, editable=False, blank=True)
+    created = models.DateField(auto_now_add=True)
+    changed = models.DateField(auto_now=True)
+
+
     def get_category(self):
         return self.category.shortname
     get_category.short_description = 'category'
-
-    def get_pic(self):
-        if self.picture:
-            return '<img id="'+str(self.id)+'" src="/'+ str(self.picture) +'" alt="" width="200" class="leftimg">'
-        else:
-            return ""
-
-    get_pic.short_description = 'small pic'
-    get_pic.allow_tags = True
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Event, self).save()
 
     def __unicode__(self):
         return self.name
