@@ -12,7 +12,7 @@
                 {{ event.get_pic }}
                 {% endautoescape %}
             {% else %}
-                <img src="/images/no_pic.jpg" alt="" width="200" class="leftimg">
+                <img src="{{ STATIC_URL }}images/no_pic.jpg" alt="" width="200" class="leftimg">
             {% endif %}
             <strong>Дата: </strong> {{ event.date }} <br>
             <strong>Описание: </strong>{{ event.text }}<br>

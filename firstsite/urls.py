@@ -4,6 +4,7 @@ admin.autodiscover()
 from django.conf import settings
 from django.contrib.auth.views import login
 from registration.forms import RegistrationFormUniqueEmail 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 
@@ -43,5 +44,8 @@ urlpatterns += patterns('event.views',
     url(r'^view/([a-z]{1,10})/$', 'viewevents', 
         {'template_name': 'main/events.html',}),
 
-    url(r'^viewall/$', 'viewall', {'template_name': 'main/events.html',}),
+    url(r'^viewall/$', 'viewall', {'template_name': 'main/events.html',},
+    name="view_all_cat"),
 )
+
+urlpatterns += staticfiles_urlpatterns()

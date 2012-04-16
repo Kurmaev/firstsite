@@ -3,7 +3,7 @@
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>firstsite</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
   </head>
   <body> 
   <div class="header" >
@@ -40,13 +40,14 @@
         <!--<div class="hero-unit" style="float:right; margin-top:0;"> -->
         <div class="hero-unit">
         Фильтр по категориям:<br>
-        <a href="/viewall/">Все</a><br>
+        <a href={% url view_all_cat %}>Все</a><br>
         {% load view_category %}
         {% show_category %}
         </div>
     </div>
 
     <div class="span6">        
+    {{ static }}
     {% block content %}{% endblock %}
     </div>
 
