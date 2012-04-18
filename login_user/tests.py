@@ -13,8 +13,6 @@ class SimpleTest(TestCase):
         self.assertRedirects(response, "/")
 
     def test_not_exsisting_username_form(self): 
-        User.objects.create_user('alice', 'alice@example.com', 'secret')
-
         form = AuthenticationForm(data={'username': '',
                                         'password': 'alice@example.com',
 })
@@ -23,8 +21,6 @@ class SimpleTest(TestCase):
                          [u"Обязательное поле."])
 
     def test_not_exsisting_password_form(self): 
-        User.objects.create_user('alice', 'alice@example.com', 'secret')
-
         form = AuthenticationForm(data={'username': 'password',
                                         'password': '',
 })
@@ -33,8 +29,6 @@ class SimpleTest(TestCase):
                          [u"Обязательное поле."]) 
 
     def test_not_exsisting_password_username_form(self): 
-        User.objects.create_user('alice', 'alice@example.com', 'secret')
-
         form = AuthenticationForm(data={'username': '',
                                         'password': '',
 })
@@ -46,8 +40,6 @@ class SimpleTest(TestCase):
                          [u"Обязательное поле."])
 
     def test_not_exsisting_form(self): 
-        User.objects.create_user('alice', 'alice@example.com', 'secret')
-
         form = AuthenticationForm(data={'username': 'alice',
                                         'password': 'alice',
 })
@@ -55,4 +47,23 @@ class SimpleTest(TestCase):
         self.assertEqual(form.errors['__all__'],
                          [u'Пожалуйста, введите верные имя пользователя и пароль. Помните, оба поля чувствительны к регистру.'])
 
+    def test_not_exsisting(self): 
+        response = self.client.post('/accounts/login/', {'username': 'john', 'password': 'smith'})
+        self.assertContains(response, u'Пожалуйста, введите верные имя пользователя\
+ и пароль. Помните, оба поля чувствительны к регистру.', 
+        count=None, status_code=200, html=False)
 
+    def test_not_exsisting_password_username(self): 
+        response = self.client.post('/accounts/login/', {'username': '', 'password': ''})
+        self.assertContains(response, u"Обязательное поле.", 
+        count=2, status_code=200, html=False)
+
+    def test_not_exsisting_password(self): 
+        response = self.client.post('/accounts/login/', {'username': '123', 'password': ''})
+        self.assertContains(response, u"Обязательное поле.", 
+        count=None, status_code=200, html=False)
+
+    def test_not_exsisting_username(self): 
+        response = self.client.post('/accounts/login/', {'username': '', 'password': '123'})
+        self.assertContains(response, u"Обязательное поле.", 
+        count=None, status_code=200, html=False)
