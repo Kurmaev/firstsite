@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 {% block content %}
- Вы вошли как {{ user }} <br><br>
- 
- Здесь будет главная страничка сайта :).<br>
+
+{% load view_last_event %}
+{% show_last_event %}
 
 {% endblock %}
