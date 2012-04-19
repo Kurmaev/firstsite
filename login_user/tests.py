@@ -5,12 +5,12 @@ from django.contrib.auth.forms import AuthenticationForm
 
 class SimpleTest(TestCase):
     fixtures = ['login_user/fixtures/test_login.xml']
-
     def test_existing(self):
         response = self.client.post("/accounts/login/")
         assert(response._request.user.is_anonymous())
         response = self.client.post('/accounts/login/', {'username': 'testUser', 'password': '123'})
         self.assertRedirects(response, "/")
+
 
     def test_not_exsisting_username_form(self): 
         form = AuthenticationForm(data={'username': '',
