@@ -5,8 +5,8 @@ register = template.Library()
 
 @register.inclusion_tag('main/show_events.html',takes_context=True)
 def show_last_event(context):
-    list_events = Event.objects.order_by("-created","date")[0:9]
     today = datetime.date.today()
+    list_events = Event.objects.order_by("-created","date").filter(date__gte=today)[0:9]
     list_events_today = []
     list_events_future = []
     for i in list_events:

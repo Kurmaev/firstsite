@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from pytils.translit import slugify
 
@@ -10,15 +11,15 @@ class Category(models.Model):
         return self.shortname
 
 class Event(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     date = models.DateField()   
     category = models.ForeignKey(Category)
     text = models.CharField(max_length=1024)
     picture = models.ImageField(upload_to='images/', blank=True)
-    slug = models.SlugField(max_length=100, editable=False, blank=True)
+    slug = models.SlugField(max_length=100, editable=False, blank=True, unique=True)
     created = models.DateField(auto_now_add=True)
     changed = models.DateField(auto_now=True)
-
+    added_by = models.CharField(max_length=100,editable=False, blank=True)
 
     def get_category(self):
         return self.category.shortname
@@ -27,6 +28,11 @@ class Event(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Event, self).save()
-
+    
+    def clean(self):
+        new_name = self.name
+        new_name = new_name.lower().capitalize().split()
+        self.name = ' '.join(new_name)        
+        
     def __unicode__(self):
         return self.name

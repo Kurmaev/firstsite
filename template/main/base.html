@@ -1,8 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>firstsite</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>firstsite</title><!--
+    {% load adminmedia %} 
+    <script type="text/javascript">
+    window.__admin_media_prefix__ = "{% filter escapejs %}{% admin_media_prefix %}{% endfilter %}";
+    </script>
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="{{ STATIC_URL}}admin/js/core.js"></script>
+-->
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
   </head>
   <body> 
@@ -10,21 +17,21 @@
 <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
-        <a href={% url home %} class="brand">Event's site</a>
+        <a href="/" class="brand">Event's site</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href={% url home %}>Завтра</a></li>
-            <li><a href={% url home %}>На неделю</a></li>
-            <li><a href={% url registration_unique_mail %}>Регистрация</a></li>
-            <li><a href={% url home %}>Добавить событие</a></li>
+            <li class="active"><a href="{% url homepage %}">Home</a></li>
+            <li><a href="{% url view_next_day %}">Завтра</a></li>
+            <li><a href="{% url view_next_week %}">На неделю</a></li>
+            <li><a href="{% url registration_unique_mail %}">Регистрация</a></li>
+            <li><a href="{% url add_event %}">Добавить событие</a></li>
           </ul>
           <ul class="nav pull-right">
             <li class="divider-vertical"></li>
             {% if user.is_authenticated %}
-                <li> <a href={% url user_logout %}>Logout</a></li>
+                <li> <a href="{% url user_logout %}">Logout</a></li>
             {% else %}
-                <li> <a href={% url user_login %}>Login</a></li>
+                <li> <a href="{% url user_login %}">Login</a></li>
             {% endif %}
           </ul>
         </div><!-- /.nav-collapse -->
@@ -40,7 +47,7 @@
         <!--<div class="hero-unit" style="float:right; margin-top:0;"> -->
         <div class="hero-unit">
         Фильтр по категориям:<br>
-        <a href={% url view_all_cat %}>Все</a><br>
+        <a href="{% url view_all_cat %}">Все</a><br>
         {% load view_category %}
         {% show_category %}
         </div>

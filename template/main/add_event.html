@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+{% block content %}
+<!--{{form.media}}-->
+{% if state %}
+{{state}}<br>
+{% endif %}
+<form action="/add_event/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

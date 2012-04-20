@@ -22,33 +22,34 @@ urlpatterns = patterns('django.contrib.auth.views',
 urlpatterns += patterns('',
 
     url(r'^accounts/register/$', 'registration.views.register', 
-    {'backend': 'registration.backends.default.DefaultBackend', 
-    'form_class': RegistrationFormUniqueEmail},
-    name="registration_unique_mail"),
-
+        {'backend': 'registration.backends.default.DefaultBackend', 
+        'form_class': RegistrationFormUniqueEmail},
+        name="registration_unique_mail"),
+#    url(r'^admin/jsi18n/', 'django.views.i18n.javascript_catalog'),
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 'firstsite.views.home', name='home'),
-
-    url(r'^css/(?P<path>.*)$', 'django.views.static.serve', 
-	{'document_root': settings.MEDIA_ROOT}),
+    url(r'^$', 'firstsite.views.home', {},'homepage'),
 
     url(r'^images/(?P<path>.*)$', 'django.views.static.serve', 
-	{'document_root': settings.MEDIA_PIC}),
+	    {'document_root': settings.MEDIA_PIC}),
 
     (r'^accounts/', include('registration.backends.default.urls')),
 )
 
 urlpatterns += patterns('event.views',
 
-    url(r'^view/([a-z]{1,10})/$', 'viewevents', 
-        {'template_name': 'main/events.html',}),
+    url(r'^view/([a-z]{1,10})/$', 'view_events_from_cat'),
 
-    url(r'^viewall/$', 'viewall', {'template_name': 'main/events.html',},
-    name="view_all_cat"),
-	url(r'^events/(?P<event_slug>[-_\w]+)/$', 'view_more_about_event',
-	{'template_name': 'main/view_events.html',},
-	name="view_more"),
+    url(r'^view-next-day/$', 'view_next_day', name="view_next_day"),
+
+    url(r'^view-next-week/$', 'view_next_week', name="view_next_week"),
+
+    url(r'^viewall/$', 'viewall', name="view_all_cat"),
+
+    url(r'^events/(?P<event_slug>[-_\w]+)/$', 'view_more_about_event',
+	    name="view_more"),
+
+    url(r'^add_event/$', 'add_event', name="add_event"),
 )
 
 urlpatterns += staticfiles_urlpatterns()
