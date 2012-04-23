@@ -1,4 +1,9 @@
 {% extends "main/base.html" %}
+
+{% block header %}
+{{ event.name }}
+{% endblock %}
+
 {% block content %}
     <div class="row-fluid">
     <h2>{{ event.name }}</h2>

@@ -1,4 +1,13 @@
 {% extends "main/base.html" %}
+
+{% block header %}
+Регистрация
+{% endblock %}
+
+{% block add_reg %}
+<li class="active">
+{% endblock %}
+
 {% block content %}
 <h1>Регистрация</h1>
 <form method="post" action="">{% csrf_token %}

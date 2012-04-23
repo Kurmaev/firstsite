@@ -1,5 +1,9 @@
 {% extends "main/base.html" %}
 
+{% block header %}
+{{ state }}
+{% endblock %}
+
 {% block content %}
 <h3>{{ state }}</h3>
 {% if list_events %}

@@ -1,4 +1,13 @@
 {% extends "main/base.html" %}
+
+{% block header %}
+Login
+{% endblock %}
+
+{% block login %}
+<li class="active">
+{% endblock %}
+
 {% block content %}
     {% if user.username %}
         Вы уже залогинены, {{ user.username}}!

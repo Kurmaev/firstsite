@@ -27,7 +27,7 @@ class Event(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Event, self).save()
+        super(Event, self).save(*args, **kwargs)
     
     def clean(self):
         new_name = self.name
