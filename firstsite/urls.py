@@ -25,7 +25,7 @@ urlpatterns += patterns('',
         {'backend': 'registration.backends.default.DefaultBackend', 
         'form_class': RegistrationFormUniqueEmail},
         name="registration_unique_mail"),
-#    url(r'^admin/jsi18n/', 'django.views.i18n.javascript_catalog'),
+
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'firstsite.views.home', {},'homepage'),

@@ -5,6 +5,8 @@ from event.models import Event, Category
 from django.shortcuts import get_object_or_404
 from event.forms import EventForm
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 today = datetime.date.today()
 
@@ -49,7 +51,7 @@ def add_event(request, template_name='main/add_event.html'):
             form.instance.added_by = request.user
             form.save()
             state = u"Событие успешно добавлено!"
-            form = EventForm()
+            return HttpResponseRedirect(reverse('view_more', args=[form.instance.slug]))
     else:
         form = EventForm()
 
