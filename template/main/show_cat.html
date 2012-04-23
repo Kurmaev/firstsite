@@ -1,5 +1,5 @@
 {% for category in list_cat %}
-    <a href="/view/{{ category.shortname }}/">{{ category.rusname }}</a><br>
+    <a href="{% url view_cat category.shortname %}">{{ category.rusname }}</a><br>
 {% endfor %}
 
 

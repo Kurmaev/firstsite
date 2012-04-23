@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('event.views',
 
-    url(r'^view/([a-z]{1,10})/$', 'view_events_from_cat'),
+    url(r'^view/([a-z]{1,10})/$', 'view_events_from_cat', name='view_cat'),
 
     url(r'^view-next-day/$', 'view_next_day', name="view_next_day"),
 

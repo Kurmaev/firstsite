@@ -8,7 +8,7 @@
 {% if state %}
 {{state}}<br>
 {% endif %}
-<form action="/add_event/" method="post">{% csrf_token %}
+<form action="" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>

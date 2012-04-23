@@ -13,8 +13,8 @@
 <h1>Последние добавленные события:</h1><br>
 
 {% if list_events_today %}
+<h3>События, которые пройдут сегодня:</h3><br>
 <div class="today">
-    <h3>События, которые пройдут сегодня:</h3><br>
     <ul>
     {% include "main/show_short_event.html" with list_events=list_events_today %}    
     </ul>
