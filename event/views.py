@@ -6,28 +6,35 @@ from django.shortcuts import get_object_or_404
 from event.forms import EventForm
 from django.contrib.auth.decorators import login_required
 
+today = datetime.date.today()
+
 def view_events_from_cat(request, sort, template_name='main/events.html'):
     p = get_object_or_404(Category, shortname=sort)
-    id_category = p.id
-    list_events = Event.objects.filter(category=id_category)
+    list_events = Event.objects.filter(category=p).filter(date__gte=today)
     return TemplateResponse(request,template_name, {'list_events':list_events})
 
 def viewall(request, template_name='main/events.html'):
-    list_events = Event.objects.order_by('date')[0:10]
+    list_events = Event.objects.order_by('date').filter(date__gte=today)
     return TemplateResponse(request,template_name, {'list_events':list_events})
 
-def view_more_about_event(request, event_slug, template_name='main/view_full_event.html'):
+def view_more_about_event(request, event_slug, 
+                            template_name='main/view_full_event.html'):
     p = get_object_or_404(Event, slug=event_slug)
     return TemplateResponse(request,template_name, {'event':p})
 
 def view_next_day(request, template_name='main/events.html'):
-    list_events = Event.objects.filter(date=datetime.date.today() + datetime.timedelta(1))
-    return TemplateResponse(request,template_name, {'list_events':list_events, 'status':"События на завтра:"})
+    list_events = Event.objects.filter(date=datetime.date.today() +\
+        datetime.timedelta(1))
+    return TemplateResponse(request,template_name, {'list_events':list_events, 
+                                                'status':"События на завтра:",
+                                                    'active_nav':'next_day'})
 
 def view_next_week(request, template_name='main/events.html'):
-    today = datetime.date.today()
-    list_events = Event.objects.filter(date__gte=today).filter(date__lte= today + datetime.timedelta(7))
-    return TemplateResponse(request,template_name, {'list_events':list_events, 'status':"События на неделю:"})
+    list_events = Event.objects.filter(date__gte=today).filter(date__lte= today +\
+        datetime.timedelta(7)).order_by("date")
+    return TemplateResponse(request,template_name, {'list_events':list_events,
+                                                 'status':"События на неделю:",
+                                                    'active_nav':'next_week'})
 
 
 

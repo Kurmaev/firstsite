@@ -1,7 +1,28 @@
 {% extends "main/base.html" %}
+
+{% block home %}
+<li class="active">
+{% endblock %}
+
 {% block content %}
 
-{% load view_last_event %}
-{% show_last_event %}
+<h1>Последние добавленные события:</h1><br>
+
+{% if list_events_today %}
+<div class="today">
+    <h3>События, которые пройдут сегодня:</h3><br>
+    <ul>
+    {% include "main/show_short_event.html" with list_events=list_events_today %}    
+    </ul>
+</div> 
+{% endif %}
+
+
+{% if list_events_future %}
+<h3>Cобытия, которые нас ждут в ближайшем будущем:</h3><br>
+    <ul>
+    {% include "main/show_short_event.html" with list_events=list_events_future %}    
+    </ul>
+{% endif %}
 
 {% endblock %}

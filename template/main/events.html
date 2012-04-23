@@ -1,13 +1,13 @@
 {% extends "main/base.html" %}
+
 {% block content %}
 <h3>{{ state }}</h3>
-{% load view_short_event %}
-    {% if list_events %}
+{% if list_events %}
 
-        {% show_short_event list_events %}
+{% include "main/show_short_event.html" with list_events=list_events %}
 
-    {% else %}
-        Событий в этой категории нет! </br>
-    {% endif %}
+{% else %}
+Событий нет! </br>
+{% endif %}
 
 {% endblock %}

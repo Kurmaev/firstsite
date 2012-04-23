@@ -4,6 +4,7 @@ from django.test import TestCase
 import datetime
 from django.contrib.auth.models import User       
 from django.utils import formats
+from django.utils.translation import activate
 
 class HomepageTestCase(TestCase):
     fixtures = ['test_home.xml']
@@ -46,9 +47,11 @@ class AddEventTestCase(TestCase):
         response = self.client.post('/accounts/login/', {'username': 'test2', 
 							'password': 'passwd'})
         self.assertRedirects(response, "/")
+        activate('ru-ru')
 
     def tearDown(self):
         self.client.post('/accounts/logout/')
+        activate('en-us')
 
     def test_add_ok_data(self):
         today = datetime.date.today() 

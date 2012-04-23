@@ -1,6 +1,10 @@
 {% extends "main/base.html" %}
+{% block add_reg %}
+<li class="active">
+{% endblock %}
+
 {% block content %}
-<!--{{form.media}}-->
+
 {% if state %}
 {{state}}<br>
 {% endif %}

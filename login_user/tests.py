@@ -2,10 +2,14 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.contrib.auth.forms import AuthenticationForm
-from django.conf import global_settings
-from django.test.utils import override_settings
+from django.utils.translation import activate
 
 class SimpleTest(TestCase):
+    def setUp(self):
+        activate('ru-ru')
+
+    def tearDown(self):
+        activate('en-us')
         
     def test_existing(self):
         
@@ -60,11 +64,10 @@ class SimpleTest(TestCase):
 
 
     def test_not_exsisting_password_username(self):
-        with self.settings(LANGUAGE_CODE = 'ru-ru'): 
-            response = self.client.post('/accounts/login/', 
-                                        {'username': '', 'password': ''})
-            self.assertContains(response, u"Обязательное поле.", 
-            count=2, status_code=200, html=False)
+        response = self.client.post('/accounts/login/', 
+                                    {'username': '', 'password': ''})
+        self.assertContains(response, u"Обязательное поле.", 
+        count=2, status_code=200, html=False)
 
 
     def test_not_exsisting_password(self): 
