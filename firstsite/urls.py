@@ -5,8 +5,6 @@ from django.conf import settings
 from django.contrib.auth.views import login
 from registration.forms import RegistrationFormUniqueEmail 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from event.models import Event
-from django.shortcuts import get_object_or_404
 
 urlpatterns = patterns('django.contrib.auth.views',
 
@@ -34,22 +32,7 @@ urlpatterns += patterns('',
 	    {'document_root': settings.MEDIA_PIC}),
 
     (r'^accounts/', include('registration.backends.default.urls')),
-)
-
-urlpatterns += patterns('event.views',
-
-    url(r'^view/([a-z]{1,10})/$', 'view_events_from_cat'),
-
-    url(r'^view-next-day/$', 'view_next_day', name="view_next_day"),
-
-    url(r'^view-next-week/$', 'view_next_week', name="view_next_week"),
-
-    url(r'^viewall/$', 'viewall', name="view_all_cat"),
-
-    url(r'^events/(?P<event_slug>[-_\w]+)/$', 'view_more_about_event',
-	    name="view_more"),
-
-    url(r'^add_event/$', 'add_event', name="add_event"),
+    (r'^events/', include('event.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
