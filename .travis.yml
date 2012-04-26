@@ -6,10 +6,12 @@ install:
   - pip install -r requirements.txt --use-mirrors
 
 before_script:
+  - mysql -e "create database eventsite" -u root
   - mysql -e "GRANT ALL PRIVILEGES ON *.* TO djangouser@localhost IDENTIFIED BY 'pass28577' WITH GRANT OPTION" -u root
-  
+ 
 after_script:
-  - mysql -e 'drop user djangouser'
+  - mysql -e 'drop user djangouser' -u root
+  - mysql -e "drop database eventsite"
 
 script: python manage.py test login_user event
 
