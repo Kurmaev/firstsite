@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from pytils.translit import slugify
+import datetime
 
 class Category(models.Model):
     shortname = models.CharField(max_length=10, unique=True)
@@ -32,7 +33,13 @@ class Event(models.Model):
     def clean(self):
         new_name = self.name
         new_name = new_name.lower().capitalize().split()
-        self.name = ' '.join(new_name)        
+        self.name = ' '.join(new_name)
+
+    def is_today(self):
+        if (self.date == datetime.date.today()):
+            return True
+        else:
+            return False
         
     def __unicode__(self):
         return self.name

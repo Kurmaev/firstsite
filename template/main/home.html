@@ -10,23 +10,34 @@
 
 {% block content %}
 
-<h1>Последние добавленные события:</h1><br>
+<h1>Ближайшие события:</h1><br>
+<ul>
 
-{% if list_events_today %}
-<h3>События, которые пройдут сегодня:</h3><br>
+{% for event in list_events %}
+{% if event.is_today %}
 <div class="today">
-    <ul>
-    {% include "main/show_short_event.html" with list_events=list_events_today %}    
-    </ul>
+{% else %}
+<div>
+{% endif %}
+
+    <div class="row-fluid">
+    <h2><a href={% url view_more  event.slug  %}>{{ event.name }}</a></h2>
+    <p>
+
+    {% if event.picture %}
+        <img src="/{{ event.picture }}" alt="" width="200" class="leftimg">
+    {% else %}
+        <img src="{{ STATIC_URL }}images/no_pic.jpg" alt="" width="200" class="leftimg">
+    {% endif %}
+
+    <strong>Дата: </strong> {{ event.date }} <br>
+    <strong>Описание: </strong>{{ event.text }}<br>
+    </p>
+    <br>
+    </div>
+     
 </div> 
-{% endif %}
-
-
-{% if list_events_future %}
-<h3>Cобытия, которые нас ждут в ближайшем будущем:</h3><br>
-    <ul>
-    {% include "main/show_short_event.html" with list_events=list_events_future %}    
-    </ul>
-{% endif %}
+{% endfor %}
+</ul>
 
 {% endblock %}

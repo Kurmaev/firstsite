@@ -758,11 +758,12 @@ div.header {
 
 .leftimg {
   float:left; /* Выравнивание по левому краю */
-  margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+  margin: 7px 7px 7px 0px; /* Отступы вокруг картинки */
 }
 
 .today {
   background-color: #F8F8FF;
+  padding: 10px
 }
 .footer{
   margin-top: 3px;
