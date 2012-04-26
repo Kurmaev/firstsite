@@ -9,9 +9,10 @@ before_script:
   - mysql -e 'grant usage on *.* to djangouser@localhost identified by ‘pass28577’;'
   - mysql -e 'grant all privileges on *.* to djangouser@localhost;'
 
+after_script:
+  - mysql -e 'drop user djangouser'
+
 script: python manage.py test login_user event
 
-after_script:
-  - mysql -e 'grant usage on *.* to djangouser@localhost identified by ‘pass28577’;'
-  - mysql -e 'grant all privileges on *.* to djangouser@localhost;'
+
 
