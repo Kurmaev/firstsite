@@ -3,3 +3,4 @@ South==0.7.4
 django-registration==0.8.0
 PIL==1.1.7
 pytils==0.2.3
+mysql-python==1.2.3
