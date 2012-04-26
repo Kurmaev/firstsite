@@ -10,8 +10,8 @@ before_script:
   - mysql -e "GRANT ALL PRIVILEGES ON *.* TO djangouser@localhost IDENTIFIED BY 'pass28577' WITH GRANT OPTION" -u root
  
 after_script:
-  - mysql -e 'drop user djangouser' -u root
-  - mysql -e "drop database eventsite"
+  - mysql -e 'drop user djangouser@localhost' -u root
+  - mysql -e "drop database eventsite" -u root
 
 script: python manage.py test login_user event
 
