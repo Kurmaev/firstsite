@@ -6,8 +6,10 @@ install:
   - pip install -r requirements.txt --use-mirrors
 
 before_script:
-  - mysql -e 'grant usage on *.* to djangouser@localhost identified by ‘pass28577’;'
-  - mysql -e 'grant all privileges on *.* to djangouser@localhost;'
+  - mysql -u root
+  - grant usage on *.* to djangouser@localhost identified by 'pass28577';
+  - grant all privileges on *.* to djangouser@localhost;
+  - exit
 
 after_script:
   - mysql -e 'drop user djangouser'
