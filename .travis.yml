@@ -5,4 +5,13 @@ python:
 install:
   - pip install -r requirements.txt --use-mirrors
 
+before_script:
+  - mysql -e 'grant usage on *.* to djangouser@localhost identified by ‘pass28577’;'
+  - mysql -e 'grant all privileges on *.* to djangouser@localhost;'
+
 script: python manage.py test login_user event
+
+after_script:
+  - mysql -e 'grant usage on *.* to djangouser@localhost identified by ‘pass28577’;'
+  - mysql -e 'grant all privileges on *.* to djangouser@localhost;'
+
