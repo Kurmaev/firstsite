@@ -15,5 +15,6 @@
     <br>
     </div>
 {% endfor %}
+{% load bootstrap_toolkit %}
 
-{% include "main/paginator/paginator.html" with page=list_events %}
+{{ list_events|pagination }}

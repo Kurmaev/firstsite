@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<h3>{{ state }}</h3>
+<h2>{{ state }}</h2>
 {% if list_events %}
 
 {% include "main/show_short_event.html" with list_events=list_events %}
 
 {% else %}
-Событий нет! </br>
+<br> <p>Событий нет!</p> 
 {% endif %}
 
 {% endblock %}
