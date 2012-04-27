@@ -31,15 +31,19 @@ def do_path_match(parser, token):
     try:
         tag_name, class_name, name_view = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires a class name and name view or URL as arguments. Token is %s" % (token.contents.split()[0], token.contents)
+        raise template.TemplateSyntaxError, \
+"%r tag requires a class name and name view or URL as arguments. \
+Token is %s" % (token.contents.split()[0], token.contents)
     
     if name_view[0] in ( '"', "'" ):
         if not (name_view[0] == name_view[-1]):
-            raise template.TemplateSyntaxError, "%r tag requires right name view as argument" % tag_name
+            raise template.TemplateSyntaxError, \
+        "%r tag requires right name view as argument" % tag_name
         else:
             name_view = name_view[1:-1]
     else:
         if name_view[-1] in ( '"', "'" ):
-            raise template.TemplateSyntaxError, "%r tag requires right name view as argument" % tag_name
+            raise template.TemplateSyntaxError, \
+        "%r tag requires right name view as argument" % tag_name
 
     return PathMatchNode(class_name, name_view)
