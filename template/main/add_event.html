@@ -1,16 +1,15 @@
 {% extends "main/base.html" %}
-{% block add_reg %}
-<li class="active">
-{% endblock %}
 
 {% block content %}
-
+{% load bootstrap_toolkit %}
 {% if state %}
 {{state}}<br>
 {% endif %}
 <form action="" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
+{{ form|as_bootstrap }}
+<div class="actions">
+    <button type="submit" class="btn primary">Submit</button>
+</div>
 </form>
 
 {% endblock %}

@@ -7,49 +7,46 @@
     Event's site
     {% endblock %}   
     </title>
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
   </head>
-  <body> 
-
-<div class="navbar">
+  <body>
+        {% load view_category %} 
+  <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
         <a href="/" class="brand">Event's site</a>
         <div class="nav-collapse">
           <ul class="nav">
-            {% block home %}<li>{% endblock %}<a href="{% url homepage %}">Home</a></li>
-            {% block next_day %}<li>{% endblock %}<a href="{% url view_next_day %}">Завтра</a></li>
-            {% block next_week %}<li>{% endblock %}<a href="{% url view_next_week %}">На неделю</a></li>
-            {% block add_reg %}<li>{% endblock %}
+            <li{% path_match active homepage %}><a href="{% url homepage %}">Home</a></li>
+            <li{% path_match active view_next_day %}><a href="{% url view_next_day %}">Завтра</a></li>
+            <li{% path_match active view_next_week %}><a href="{% url view_next_week %}">На неделю</a></li>
             {% if user.is_authenticated %}
+            <li{% path_match active add_event %}>
             <a href="{% url add_event %}">Добавить событие</a></li>
             {% else %}
+            <li{% path_match active registration_unique_mail %}>
             <a href="{% url registration_unique_mail %}">Регистрация</a></li>
             {% endif %}
 
           </ul>
           <ul class="nav pull-right">
             <li class="divider-vertical"></li>
-            {% block login %}<li>{% endblock %}
             {% if user.is_authenticated %}
-                <a href="{% url user_logout %}">Logout</a></li>
+            <li><a href="{% url user_logout %}">Logout</a></li>
             {% else %}
-                <a href="{% url user_login %}">Login</a></li>
+            <li{% path_match active user_login %}><a href="{% url user_login %}">Login</a></li>
             {% endif %}
           </ul>
-        </div><!-- /.nav-collapse -->
+        </div>
       </div>
-    </div><!-- /navbar-inner -->
-  </div>
+    </div>
+  </div><!-- navbar -->
 
   <div class="row-fluid show-grid">
     <div class="span3">
-        <div class="hero-unit">
-        Фильтр по категориям:<br>
-        <a href="{% url view_all_cat %}">Все</a><br>
-        {% load view_category %}
-        {% show_category %}
-        </div>
+    {% show_category %}
     </div>
 
     <div class="span6">
