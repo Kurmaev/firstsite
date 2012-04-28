@@ -43,7 +43,40 @@ def view_next_week(request, template_name='main/events.html'):
     {'list_events':getPage(request, list_events, 3),
     'state':"События на неделю",})
 
+def search(request, template_name='main/search.html'):
+    if 'query' in request.GET and request.GET['query']:
+        q = request.GET['query']
+        try:
+            from sphinx import sphinxapi
+        except:
+            return TemplateResponse(request,'main/disable_search.html', 
+                {'query': q,})
+        
+        sphinx = sphinxapi.SphinxClient()
+        sphinx.SetServer('', 3312)
+        sphinx.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED)
+        sphinx.SetSortMode(sphinxapi.SPH_SORT_RELEVANCE)
+        sphinx.SetFieldWeights({'name':20, 'text':10})
+        
+        results = sphinx.Query(q)
 
+        if results:
+            ids = [m['id'] for m in results['matches']]
+
+            # ?
+            events = ids and Event.objects.filter(id__in=ids)
+
+            #сортировка по весам
+            events3 = dict((o.pk, o) for o in events)
+            events3 = [events3[id] for id in ids]
+
+            return TemplateResponse(request,template_name, 
+                {'events': events3, 'query': q})
+        else:
+            return TemplateResponse(request,'main/disable_search.html', 
+                {'query': q,})
+    else:
+        return HttpResponseRedirect(reverse('homepage'))
 
 @login_required()
 def add_event(request, template_name='main/add_event.html'):
@@ -58,5 +91,5 @@ def add_event(request, template_name='main/add_event.html'):
     else:
         form = EventForm()
 
-    return TemplateResponse(request, template_name, 
+    return TemplateResponse(request, template_name,     
                             {'form': form,'state':state,})

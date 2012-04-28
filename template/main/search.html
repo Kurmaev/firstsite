@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+
+{% block header %}
+Поиск {{ query }}
+{% endblock%}
+
+{% block content %}
+<h3>Вы искали: <strong>{{ query }}</strong></h3>
+<br>
+{% if events %}
+    <h3>Найдено событий: {{ events|length }} </h3>
+    <br>
+        {% include "main/show_short_event_without_pagination.html" with list_events=events %}
+    
+{% else %}
+    <h3>No events matched your search criteria.</h3>
+{% endif %}
+</div>
+{% endblock%}

@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'event',
     'south',
     'bootstrap_toolkit',
+    'djangosphinx',
 
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -175,6 +176,7 @@ LOGGING = {
 
 LOGIN_REDIRECT_URL = '/'
 
+SPHINX_API_VERSION = 0x116
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",

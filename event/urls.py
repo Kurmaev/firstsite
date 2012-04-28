@@ -14,5 +14,6 @@ urlpatterns = patterns('event.views',
 	    name="view_more"),
 
     url(r'^add_event/$', 'add_event', name="add_event"),
+    url(r'^search/$', 'search', name="search_event"),
 )
 

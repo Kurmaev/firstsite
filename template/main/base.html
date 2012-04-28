@@ -29,7 +29,9 @@
             <li{% path_match active registration_unique_mail %}>
             <a href="{% url registration_unique_mail %}">Регистрация</a></li>
             {% endif %}
-
+          <form action="{% url search_event %}" class="navbar-search pull-left">
+            <input type="text" name="query" placeholder="Search" class="search-query span2">
+          </form>
           </ul>
           <ul class="nav pull-right">
             <li class="divider-vertical"></li>
