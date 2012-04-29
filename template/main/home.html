@@ -10,13 +10,8 @@
 <ul>
 
 {% for event in list_events %}
-{% if event.is_today %}
-<div class="today">
-{% else %}
-<div>
-{% endif %}
 
-    <div class="row-fluid">
+    <div class="row-fluid {% if event.is_today %}today{% endif %}">
     <h2><a href={% url view_more  event.slug  %}>{{ event.name }}</a></h2>
     <p>
 
@@ -31,8 +26,7 @@
     </p>
     <br>
     </div>
-     
-</div> 
+
 {% endfor %}
 </ul>
 

@@ -36,10 +36,7 @@ class Event(models.Model):
         self.name = ' '.join(new_name)
 
     def is_today(self):
-        if (self.date == datetime.date.today()):
-            return True
-        else:
-            return False
+        return (self.date == datetime.date.today())
         
     def __unicode__(self):
         return self.name
