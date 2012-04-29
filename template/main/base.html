@@ -19,14 +19,14 @@
         <a href="/" class="brand">Event's site</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li{% path_match active homepage %}><a href="{% url homepage %}">Home</a></li>
-            <li{% path_match active view_next_day %}><a href="{% url view_next_day %}">Завтра</a></li>
-            <li{% path_match active view_next_week %}><a href="{% url view_next_week %}">На неделю</a></li>
+            <li{% path_match "active" "homepage" %}><a href="{% url homepage %}">Home</a></li>
+            <li{% path_match "active" "view_next_day" %}><a href="{% url view_next_day %}">Завтра</a></li>
+            <li{% path_match "active" "view_next_week" %}><a href="{% url view_next_week %}">На неделю</a></li>
             {% if user.is_authenticated %}
-            <li{% path_match active add_event %}>
+            <li{% path_match "active" "add_event" %}>
             <a href="{% url add_event %}">Добавить событие</a></li>
             {% else %}
-            <li{% path_match active registration_unique_mail %}>
+            <li{% path_match "active" "registration_unique_mail" %}>
             <a href="{% url registration_unique_mail %}">Регистрация</a></li>
             {% endif %}
           <form action="{% url search_event %}" class="navbar-search pull-left">
@@ -38,7 +38,7 @@
             {% if user.is_authenticated %}
             <li><a href="{% url user_logout %}">Logout</a></li>
             {% else %}
-            <li{% path_match active user_login %}><a href="{% url user_login %}">Login</a></li>
+            <li{% path_match "active" "user_login" %}><a href="{% url user_login %}">Login</a></li>
             {% endif %}
           </ul>
         </div>

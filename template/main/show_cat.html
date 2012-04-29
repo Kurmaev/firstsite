@@ -3,11 +3,11 @@
 <ul class="nav nav-list">
   <li class="nav-header">Фильтр по категориям:</li>
   <li class="divider"></li>
-  <li{% path_match active view_all_cat %}><a href="{% url view_all_cat %}">Все</a></li>
+  <li{% path_match "active" "view_all_cat" %}><a href="{% url view_all_cat %}">Все</a></li>
 
 {% for category in list_cat %}
 {% url view_cat category.shortname as link %}
-  <li{% path_match active link %}><a href="{{ link }}">{{ category.rusname }}</a></li>
+  <li{% path_match "active" link %}><a href="{{ link }}">{{ category.rusname }}</a></li>
 {% endfor %}
 </ul>
 </div>
