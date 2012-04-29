@@ -81,7 +81,7 @@ class HomepageTestCase(TestCase):
 
 
         str_response = str(response)
-        today_string = str_response.find('<div class="today">')
+        today_string = str_response.find('today">')
         today_event = str_response.find(">Балет</a>")
         future_event = str_response.find(">Titanes</a>")
 
