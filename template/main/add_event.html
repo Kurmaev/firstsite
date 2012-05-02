@@ -1,5 +1,58 @@
 {% extends "main/base.html" %}
 
+{% block styles %}
+<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/date.js"></script>
+<!--[if IE]><script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.bgiframe.min.js"></script><![endif]-->
+<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.datePicker.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}datepicker/styles/datePicker.css">
+<script type="text/javascript" charset="utf-8">
+    $(function()
+    {
+        $('.date-pick').datePicker()
+    });
+</script>
+<style type="text/css">
+label {
+	width: 160px;
+	display: inline-block;
+	line-height: 1.8;
+	vertical-align: top;
+}
+#chooseDateForm li {
+	list-style: none;
+	padding: 5px;
+	clear: both;
+}
+select {
+	width: 100px;
+}
+input {
+	margin: 5px 0;
+}
+input.dp-applied {
+	float: left;
+}
+
+a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url({{ STATIC_URL }}datepicker/images/calendar.png) no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+</style>
+
+{% endblock %}
+
 {% block content %}
 {% load bootstrap_toolkit %}
 {% if state %}

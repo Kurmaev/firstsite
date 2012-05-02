@@ -9,5 +9,6 @@ class EventForm(ModelForm):
         model = Event
         widgets = {
             'text': Textarea(attrs={'cols': 80, 'rows': 20}),
+            'date': DateInput(attrs={'class':'date-pick'}),
         }
 

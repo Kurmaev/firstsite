@@ -3,11 +3,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>
-    {% block header %}
-    Event's site
-    {% endblock %}   
+    {% block header %}Event's site{% endblock %}   
     </title>
-
+    {% block styles %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
   </head>
