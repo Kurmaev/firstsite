@@ -15,7 +15,7 @@ class Event(models.Model):
     name = models.CharField(max_length=100, unique=True)
     date = models.DateField()   
     category = models.ForeignKey(Category)
-    text = models.CharField(max_length=1024)
+    text = models.CharField(max_length=3072)
     picture = models.ImageField(upload_to='images/', blank=True)
     slug = models.SlugField(max_length=100, editable=False, blank=True, unique=True)
     created = models.DateField(auto_now_add=True)
