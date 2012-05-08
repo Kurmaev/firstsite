@@ -56,120 +56,6 @@
 				tooltip: "Cut"
 			},
 
-			decreaseFontSize: {
-				groupIndex: 9,
-				visible: false,
-				tags: ["small"],
-				tooltip: "Decrease font size",
-				exec: function () {
-					this.decreaseFontSize();
-				}
-			},
-
-			html: {
-				groupIndex: 10,
-				visible: false,
-				exec: function () {
-					var elementHeight;
-
-					if (this.options.resizeOptions && $.fn.resizable) {
-						elementHeight = this.element.height();
-					}
-
-					if (this.viewHTML) { //textarea is shown
-						this.setContent(this.original.value);
-
-						$(this.original).hide();
-						this.editor.show();
-
-						if (this.options.resizeOptions && $.fn.resizable) {
-							// if element.height still the same after frame was shown
-							if (elementHeight === this.element.height()) {
-								this.element.height(elementHeight + this.editor.height());
-							}
-
-							this.element.resizable($.extend(true, {
-								alsoResize: this.editor
-							}, this.options.resizeOptions));
-						}
-						
-						this.ui.toolbar.find("li").each(function () {
-							var li = $(this);
-
-							if (li.hasClass("html")) {
-								li.removeClass("active");
-							} else {
-								li.removeClass('disabled');
-							}
-						});
-					} else { //wysiwyg is shown
-						this.saveContent();
-
-						$(this.original).css({
-							width:	this.element.outerWidth() - 6,
-							height: this.element.height() - this.ui.toolbar.height() - 6,
-							resize: "none"
-						}).show();
-						this.editor.hide();
-						
-						if (this.options.resizeOptions && $.fn.resizable) {
-							// if element.height still the same after frame was hidden
-							if (elementHeight === this.element.height()) {
-								this.element.height(this.ui.toolbar.height());
-							}
-
-							this.element.resizable("destroy");
-						}
-
-						this.ui.toolbar.find("li").each(function () {
-							var li = $(this);
-
-							if (li.hasClass("html")) {
-								li.addClass("active");
-							} else {
-								if (false === li.hasClass("fullscreen")) {
-									li.removeClass("active").addClass('disabled');
-								}
-							}
-						});
-					}
-
-					this.viewHTML = !(this.viewHTML);
-				},
-				tooltip: "View source code"
-			},
-
-			increaseFontSize: {
-				groupIndex: 9,
-				visible: false,
-				tags: ["big"],
-				tooltip: "Increase font size",
-				exec: function () {
-					this.increaseFontSize();
-				}
-			},
-
-			indent: {
-				groupIndex: 2,
-				visible: true,
-				tooltip: "Indent"
-			},
-
-			insertHorizontalRule: {
-				groupIndex: 6,
-				visible: true,
-				tags: ["hr"],
-				tooltip: "Insert Horizontal Rule"
-			},
-
-
-			insertOrderedList: {
-				groupIndex: 5,
-				visible: true,
-				tags: ["ol"],
-				tooltip: "Insert Ordered List"
-			},
-
 			insertUnorderedList: {
 				groupIndex: 5,
 				visible: true,
@@ -186,65 +72,6 @@
 				},
 				tooltip: "Italic",
 				hotkey: {"ctrl": 1, "key": 73}
-			},
-
-			justifyCenter: {
-				groupIndex: 1,
-				visible: true,
-				tags: ["center"],
-				css: {
-					textAlign: "center"
-				},
-				tooltip: "Justify Center"
-			},
-
-			justifyFull: {
-				groupIndex: 1,
-				visible: true,
-				css: {
-					textAlign: "justify"
-				},
-				tooltip: "Justify Full"
-			},
-
-			justifyLeft: {
-				visible: true,
-				groupIndex: 1,
-				css: {
-					textAlign: "left"
-				},
-				tooltip: "Justify Left"
-			},
-
-			justifyRight: {
-				groupIndex: 1,
-				visible: true,
-				css: {
-					textAlign: "right"
-				},
-				tooltip: "Justify Right"
-			},
-
-			ltr: {
-				groupIndex: 10,
-				visible: false,
-				exec: function () {
-					var p = this.dom.getElement("p");
-
-					if (!p) {
-						return false;
-					}
-
-					$(p).attr("dir", "ltr");
-					return true;
-				},
-				tooltip : "Left to Right"
-			},
-
-			outdent: {
-				groupIndex: 2,
-				visible: true,
-				tooltip: "Outdent"
 			},
 
 			paragraph: {
@@ -278,46 +105,6 @@
 				tooltip: "Remove formatting"
 			},
 
-			rtl: {
-				groupIndex: 10,
-				visible: false,
-				exec: function () {
-					var p = this.dom.getElement("p");
-
-					if (!p) {
-						return false;
-					}
-
-					$(p).attr("dir", "rtl");
-					return true;
-				},
-				tooltip : "Right to Left"
-			},
-
-			strikeThrough: {
-				groupIndex: 0,
-				visible: true,
-				tags: ["s", "strike"],
-				css: {
-					textDecoration: "line-through"
-				},
-				tooltip: "Strike-through"
-			},
-
-			subscript: {
-				groupIndex: 3,
-				visible: true,
-				tags: ["sub"],
-				tooltip: "Subscript"
-			},
-
-			superscript: {
-				groupIndex: 3,
-				visible: true,
-				tags: ["sup"],
-				tooltip: "Superscript"
-			},
-
 			underline: {
 				groupIndex: 0,
 				visible: true,
@@ -335,24 +122,6 @@
 				tooltip: "Undo"
 			},
 
-			code: {
-				visible : true,
-				groupIndex: 6,
-				tooltip: "Code snippet",
-				exec: function () {
-					var range	= this.getInternalRange(),
-						common	= $(range.commonAncestorContainer),
-						$nodeName = range.commonAncestorContainer.nodeName.toLowerCase();
-					if (common.parent("code").length) {
-						common.unwrap();
-					} else {
-						if ($nodeName !== "body") {
-							common.wrap("<code/>");
-						}
-					}
-				}
-			},
-			
 			cssWrap: {
 				visible : false,
 				groupIndex: 6,

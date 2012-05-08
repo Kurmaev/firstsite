@@ -45,13 +45,9 @@ class Event(models.Model):
         #sanitize html
         if self.text:
         #если текста нет, ошибка уже будет поймана
-            c = Cleaner(allow_tags=['b','p','br','a','div','strong'], 
-                                    remove_unknown_tags=False)
+            c = Cleaner(allow_tags=['b','p','br','div','strong','i','u','ul',
+                                    'li'], remove_unknown_tags=False)
             self.text = c.clean_html(self.text)
-        #replace <b> tag 
-        #self.text = self.text.replace('<b>','<strong>')
-        #self.text = self.text.replace('</b>','</strong>')
-        #check or set date_end
         if self.date_end:
             if self.date_start > self.date_end:
                 raise ValidationError('date end early than date start')
