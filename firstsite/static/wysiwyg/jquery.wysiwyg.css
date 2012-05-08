@@ -1,67 +1,5 @@
-{% extends "main/base.html" %}
 
-{% block styles %}
-<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/date.js"></script>
-<!--[if IE]><script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.bgiframe.min.js"></script><![endif]-->
-<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.datePicker.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}datepicker/styles/datePicker.css">
-<script type="text/javascript" charset="utf-8">
-    $(function()
-    {
-        $('.date-pick').datePicker()
-    });
-</script>
-<style type="text/css">
-label {
-	width: 160px;
-	display: inline-block;
-	line-height: 1.8;
-	vertical-align: top;
-}
-#chooseDateForm li {
-	list-style: none;
-	padding: 5px;
-	clear: both;
-}
-select {
-	width: 100px;
-}
-input {
-	margin: 5px 0;
-}
-input.dp-applied {
-	float: left;
-}
-
-a.dp-choose-date {
-	float: left;
-	width: 16px;
-	height: 16px;
-	padding: 0;
-	margin: 5px 3px 0;
-	display: block;
-	text-indent: -2000px;
-	overflow: hidden;
-	background: url({{ STATIC_URL }}datepicker/images/calendar.png) no-repeat; 
-}
-a.dp-choose-date.dp-disabled {
-	background-position: 0 -20px;
-	cursor: default;
-}
-</style>
-
-<script type="text/javascript" src="{{ STATIC_URL }}wysiwyg/jquery.wysiwyg.js"></script>
-<script type="text/javascript">
-$(function() {
-    $('#id_text').wysiwyg({
-    css: "{{ STATIC_URL }}wysiwyg/jquery.wysiwyg.css"
-    });
-});
-</script>
-
-<style type="text/css">
-div.wysiwyg { border: 1px solid #999; padding: 5px; background: #fff url("{{ STATIC_URL }}wysiwyg/jquery.wysiwyg.bg.png") repeat-x top; }
+div.wysiwyg { border: 1px solid #999; padding: 5px; background: #fff url("jquery.wysiwyg.bg.png") repeat-x top; }
 div.wysiwyg * { margin: 0; padding: 0; }
 
 div.wysiwyg ul.toolbar li.jwysiwyg-custom-command { overflow: hidden; }
@@ -69,11 +7,12 @@ div.wysiwyg ul.toolbar li.jwysiwyg-custom-command { overflow: hidden; }
 div.wysiwyg ul.toolbar { border-bottom: 1px solid #ccc; float: left; width: 100%; padding: 0; }
 div.wysiwyg ul.toolbar li { list-style: none; float: left; margin: 1px 2px 3px 0;  background: rgb(240, 240, 240); -moz-user-select: none; -webkit-user-select: none; user-select: none; clear: none; padding: 0 }
 div.wysiwyg ul.toolbar li.separator { width: 1px; height: 16px; margin: 0 4px; border-left: 1px solid #ccc; }
-div.wysiwyg ul.toolbar li { text-indent: -5000px; opacity: 0.85; filter: alpha(opacity=85); display: block; width: 16px; height: 16px; background: url('{{ STATIC_URL }}wysiwyg/jquery.wysiwyg.gif') no-repeat -64px -80px; border: 1px dotted rgb(240, 240, 240); cursor: pointer; margin: 0px; }
+div.wysiwyg ul.toolbar li { text-indent: -5000px; opacity: 0.85; filter: alpha(opacity=85); display: block; width: 16px; height: 16px; background: url('jquery.wysiwyg.gif') no-repeat -64px -80px; border: 1px dotted rgb(240, 240, 240); cursor: pointer; margin: 0px; }
 div.wysiwyg ul.toolbar li.wysiwyg-button-hover, div.wysiwyg ul.toolbar li.active { opacity: 1.00; filter:alpha(opacity=100); border: 1px outset rgb(224, 224, 224); }
 div.wysiwyg ul.toolbar li.active { background-color: rgb(255, 255, 64); border: 1px solid rgb(208, 208, 208); border-left-color: #aaa; border-top-color: #aaa; margin: 0; }
 
 div.wysiwyg ul.toolbar li.disabled, div.wysiwyg ul.toolbar li.wysiwyg-button-hover.disabled, div.wysiwyg ul.toolbar li.active.disabled { opacity: 0.5; filter:alpha(opacity=50); border: 0px none transparent; padding: 1px; cursor: auto; }
+
 
 div.wysiwyg ul.toolbar li.bold { background-position: 0 -16px; }
 div.wysiwyg ul.toolbar li.italic { background-position: -16px -16px; }
@@ -154,20 +93,4 @@ background-color:white; padding:0px; margin:0; display:block; width: 100%; }
 .wysiwyg-dialog-content form.wysiwyg .form-row input.width-auto { width:auto; }
 .wysiwyg-dialog-content form.wysiwyg input.width-small { width:50px; min-width:50px; max-width:50px; }
 .wysiwyg-dialog-content form.wysiwyg input, .wysiwyg-dialog form.wysiwyg select { padding:2px; width:100%; margin:2px; }
-.wysiwyg-dialog-content form.wysiwyg input[type=submit], .wysiwyg-dialog form.wysiwyg input[type=reset] { padding:2px 7px; width:auto; }}
-</style>
-{% endblock %}
-
-{% block content %}
-{% load bootstrap_toolkit %}
-{% if state %}
-{{state}}<br>
-{% endif %}
-<form action="" method="post">{% csrf_token %}
-{{ form|as_bootstrap }}
-<div class="actions">
-    <button type="submit" class="btn primary">Submit</button>
-</div>
-</form>
-
-{% endblock %}
+.wysiwyg-dialog-content form.wysiwyg input[type=submit], .wysiwyg-dialog form.wysiwyg input[type=reset] { padding:2px 7px; width:auto; }

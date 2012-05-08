@@ -8,7 +8,7 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         widgets = {
-            'text': Textarea(attrs={'cols': 80, 'rows': 20}),
+            'text': Textarea(attrs={'cols': 80, 'rows': 20,'class':'wysiwyg'}),
             'date_start': DateInput(attrs={'class':'date-pick'}),
             'date_end': DateInput(attrs={'class':'date-pick'}),
         }
