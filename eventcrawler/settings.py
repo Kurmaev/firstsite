@@ -13,14 +13,18 @@ BOT_VERSION = '1.0'
 
 SPIDER_MODULES = ['eventcrawler.spiders']
 NEWSPIDER_MODULE = 'eventcrawler.spiders'
-USER_AGENT = 'Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1 FirePHP/0.6'
+USER_AGENT = 'Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:9.0.1)\
+ Gecko/20100101 Firefox/9.0.1 FirePHP/0.6'
 
 
 CONCURRENT_REQUESTS = 1
 DOWNLOAD_DELAY = 5
 
 
-ITEM_PIPELINES = ['eventcrawler.pipelines.EventcrawlerPipeline',]
+ITEM_PIPELINES = [
+    'scrapy.contrib.pipeline.images.ImagesPipeline',
+    'eventcrawler.pipelines.EventcrawlerPipeline',
+    ]
 
 
 def setup_django_env(path):
@@ -40,3 +44,4 @@ sys.path.insert(0, os.path.join(current_dir, 'eventcrawler'))
 django_app = os.path.join(current_dir, 'firstsite')
 setup_django_env(django_app)
 
+IMAGES_STORE = os.path.join(current_dir,'media','images')

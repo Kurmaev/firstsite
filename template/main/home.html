@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h2>Ближайшие события:</h2><br>
+<h2>Последние добавленные события:</h2><br>
 <ul>
 
 {% for event in list_events %}
@@ -20,10 +20,14 @@
     {% else %}
         <img src="{{ STATIC_URL }}images/no_pic.jpg" alt="" width="200" class="leftimg">
     {% endif %}
-
-    <strong>Дата: </strong> {{ event.date }} <br>
-    <strong>Описание: </strong>{{ event.text }}<br>
+    {% if event.is_one_day %}
+    <strong>Дата проведения: </strong> {{ event.date_start }}
+    {% else %}
+    <strong>Дата начала: </strong> {{ event.date_start }}<br>
+    <strong>Дата окончания: </strong> {{ event.date_end }}
+    {% endif %}<br>
     </p>
+    <strong>Описание: </strong>{{ event.text|safe }}<br>
     <br>
     </div>
 

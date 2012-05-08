@@ -5,3 +5,4 @@ PIL==1.1.7
 pytils==0.2.3
 mysql-python==1.2.3
 django-bootstrap-toolkit==2.5.3
+lxml==2.3

@@ -13,13 +13,19 @@
     {% else %}
         <img src="{{ STATIC_URL }}images/no_pic.jpg" alt="" width="200" class="leftimg">
     {% endif %}
-    <strong>Дата проведения: </strong> {{ event.date }} <br>
-    <strong>Описание: </strong><br>{{ event.text }}<br>
-    <br>
+    {% if event.is_one_day %}
+    <strong>Дата проведения: </strong> {{ event.date_start }}
+    {% else %}
+    <strong>Дата начала:    </strong> {{ event.date_start }}<br>
+    <strong>Дата окончания: </strong> {{ event.date_end }}
+    {% endif %}<br>
     <strong>Добавил </strong>пользователь <strong>{{ event.added_by }}</strong><br>
     <strong>Создано: </strong>{{ event.created }}<br>
-    <strong>Редактировано: </strong>{{ event.changed }}<br>
+    <strong>Редактировано: </strong>{{ event.changed }}
     </p>
-    <br>
+    <strong>Описание: </strong><br>{{ event.text|safe }}<br>
+    {% if event.place %}
+    <strong>Где и во сколько: </strong><br>{{ event.place }}<br>
+    {% endif %}
     </div>
 {% endblock %}
