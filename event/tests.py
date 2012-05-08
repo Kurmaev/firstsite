@@ -17,7 +17,10 @@ class AddEventTestCase(TestCase):
         self.page_add = reverse('add_event')
         self.category = Category(shortname = u"cinema", rusname = u"Кино",
 description = u"Все о кино и кинотеатрах")
-        self.category.save()
+        try:
+            self.category.save()
+        except:
+            self.category = Category.objects.get(shortname = "cinema")
 
     def tearDown(self):
         self.client.post('/accounts/logout/')
@@ -35,7 +38,7 @@ description = u"Все о кино и кинотеатрах")
  
         self.assertContains(response, formated_today, count=3, status_code=200,
                              html=False)
-        self.assertContains(response, 'Uniquename',status_code=200, html=False)
+        self.assertContains(response, 'uniquename',status_code=200, html=False)
         self.assertContains(response, 'test2',status_code=200, html=False)
         self.assertContains(response, 'this is test text',status_code=200, 
                             html=False)
