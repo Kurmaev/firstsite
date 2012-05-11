@@ -8,6 +8,7 @@ from scrapy.item import Item, Field
 class EventcrawlerItem(Item):
         name = Field()
         text = Field()
+        category = Field()
         date_start = Field()
         date_end = Field()
         place_time = Field()

@@ -17,7 +17,7 @@ def view_events_from_cat(request, sort, template_name='main/events.html'):
     list_events = Event.objects.filter(category=p).filter(date_end__gte=today)
 
     return TemplateResponse(request,template_name, 
-        {'list_events':getPage(request, list_events, 3), 
+        {'list_events':getPage(request, list_events, 6), 
         'state':' '.join((u"Категория ", p.rusname))})
 
 def viewall(request, template_name='main/events.html'):
@@ -37,7 +37,7 @@ def view_next_day(request, template_name='main/events.html'):
     list_events = list_events.filter(date_end__gte=next_day)
 
     return TemplateResponse(request,template_name, 
-        {'list_events':getPage(request, list_events, 3), 
+        {'list_events':getPage(request, list_events, 6), 
         'state':"События на завтра",})
 
 def view_next_week(request, template_name='main/events.html'):
@@ -46,7 +46,7 @@ def view_next_week(request, template_name='main/events.html'):
 Q(date_end__gte=next_week))
 
     return TemplateResponse(request,template_name, 
-    {'list_events':getPage(request, list_events, 3),
+    {'list_events':getPage(request, list_events, 6),
     'state':"События на неделю",})
 
 def search(request, template_name='main/search.html'):

@@ -45,3 +45,8 @@ django_app = os.path.join(current_dir, 'firstsite')
 setup_django_env(django_app)
 
 IMAGES_STORE = os.path.join(current_dir,'media','images')
+
+LOG_FILE = os.path.join(current_dir, '~log.scrapy.log')
+
+LOG_STDOUT = True
+
