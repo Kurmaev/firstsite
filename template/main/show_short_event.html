@@ -1,3 +1,4 @@
+{% load mytag %}
 {% for event in list_events %}
     <div class="row-fluid">
     <h2><a href={% url view_more  event.slug  %}>{{ event.name }}</a></h2>
@@ -15,7 +16,7 @@
     <strong>Дата начала:    </strong> {{ event.date_start }}<br>
     <strong>Дата окончания: </strong> {{ event.date_end }}
     {% endif %}<br>
-    <strong>Описание: </strong>{{ event.text|safe }}<br>
+    <strong>Описание: </strong>{{ event.text|cut:1000|safe }}<br>
     </p>
     <br>
     </div>

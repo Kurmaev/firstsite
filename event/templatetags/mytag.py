@@ -21,3 +21,13 @@ def path_match(context, class_name, name_view):
         return u''.join((' class="',class_name,'"'))
     else:
         return ""
+
+@register.filter(name='cut')
+def cut(text, len_):
+    """
+    Cut text to allowed lenght
+    """
+    if len(text)>len_:
+        return '...'.join((text[:len_],''))
+    else:
+        return text[:len_]

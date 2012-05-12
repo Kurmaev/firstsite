@@ -8,6 +8,8 @@ urlpatterns = patterns('event.views',
 
     url(r'^view-next-week/$', 'view_next_week', name="view_next_week"),
 
+    url(r'^$', 'view_today', name="view_today"),
+
     url(r'^view-all/$', 'viewall', name="view_all_cat"),
 
     url(r'^more/(?P<event_slug>[-_\w]+)/$', 'view_more_about_event',

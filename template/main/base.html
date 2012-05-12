@@ -11,16 +11,17 @@
     {% block scripts %}{% endblock %}
   </head>
   <body>
-        {% load view_category %} 
+        {% load mytag %} 
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
         <a href="/" class="brand">Event's site</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li{% path_match "active" "homepage" %}><a href="{% url homepage %}">Home</a></li>
+            <li{% path_match "active" "view_today" %}><a href="{% url view_today %}">Home</a></li>
             <li{% path_match "active" "view_next_day" %}><a href="{% url view_next_day %}">Завтра</a></li>
             <li{% path_match "active" "view_next_week" %}><a href="{% url view_next_week %}">На неделю</a></li>
+            <li{% path_match "active" "randpage" %}><a href="{% url randpage %}">Мне повезет!</a></li>
             {% if user.is_authenticated %}
             <li{% path_match "active" "add_event" %}>
             <a href="{% url add_event %}">Добавить событие</a></li>
@@ -58,6 +59,7 @@
         <br>
     </div>
 
+    </div>
     </div>
 
   <hr>

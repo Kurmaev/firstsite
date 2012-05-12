@@ -1,14 +1,14 @@
 {% extends "main/base.html" %}
 
 {% block header %}
-Последние добавленные
+Случайные события
 {% endblock %}
 
 {% block content %}
 
-<h2>Последние добавленные события:</h2><br>
+<h2>Случайно выбранные события:</h2><br>
 <ul>
-
+{% load mytag %}
 {% for event in list_events %}
 
     <div class="row-fluid {% if event.is_today %}today{% endif %}">
@@ -27,7 +27,7 @@
     <strong>Дата окончания: </strong> {{ event.date_end }}
     {% endif %}<br>
     </p>
-    <strong>Описание: </strong>{{ event.text|safe }}<br>
+    <strong>Описание: </strong>{{ event.text|cut:1000|safe }}<br>
     <br>
     </div>
 

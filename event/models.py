@@ -54,9 +54,6 @@ class Event(models.Model):
         else:
             self.date_end = self.date_start
 
-    def is_today(self):
-        return (self.date_start == datetime.date.today()) &\
-                 (self.date_end == datetime.date.today())
     def is_one_day(self):
         return (self.date_start == self.date_end) 
 

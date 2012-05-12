@@ -40,6 +40,14 @@ def view_next_day(request, template_name='main/events.html'):
         {'list_events':getPage(request, list_events, 6), 
         'state':"События на завтра",})
 
+def view_today(request, template_name='main/events.html'):
+    list_events = Event.objects.filter(date_start__lte=today)
+    list_events = list_events.filter(date_end__gte=today)
+
+    return TemplateResponse(request,template_name, 
+        {'list_events':getPage(request, list_events, 6), 
+        'state':"Сегодня можно посетить",})
+
 def view_next_week(request, template_name='main/events.html'):
     next_week = today + datetime.timedelta(7)
     list_events = Event.objects.filter(Q(date_start__range=(today,next_week))|\
