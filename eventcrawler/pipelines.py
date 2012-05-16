@@ -41,8 +41,8 @@ class EventcrawlerPipeline(object):
 
             try:
                 event.save()
-            except IntegrityError:
-                raise DropItem("Error")
+            except IntegrityError, x:
+                raise DropItem("IntegrityError")
 
         else:
             raise DropItem("Event too old")

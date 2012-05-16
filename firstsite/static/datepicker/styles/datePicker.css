@@ -57,8 +57,6 @@ table.jCalendar td.unselectable.dp-hover {
 
 /* For the popup */
 
-/* NOTE - you will probably want to style a.dp-choose-date - see how I did it in demo.css */
-
 div.dp-popup {
 	position: relative;
 	background: #ccc;
@@ -127,3 +125,35 @@ div.dp-popup td {
 div.dp-popup td.disabled {
 	cursor: default;
 }
+#chooseDateForm li {
+	list-style: none;
+	padding: 5px;
+	clear: both;
+}
+select {
+	width: 100px;
+}
+
+a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url(../images/calendar.png) no-repeat; 
+}
+input.dp-applied {
+	width: 425px;
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+
+#calendar-me {
+	margin: 20px;
+}
+

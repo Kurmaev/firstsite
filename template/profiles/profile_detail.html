@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+{% load bootstrap_toolkit %}
+{% if state %}
+{{state}}<br>
+{% endif %}
+<br>
+<h3>Профиль пользователя {{ profile.user }} </h3>
+<br>
+<p><strong>Дата рождения: </strong>{% if profile.view_birthday %}
+{{ profile.birthday }}
+{% else %}
+Пользователь скрыл эту информацию {% endif %}</p>
+<p><strong>О себе: </strong> {% if profile.about %} {{ profile.about }} {% else %} Не указано. {% endif %}</p>
+{% endblock %}

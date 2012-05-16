@@ -22,6 +22,9 @@
             <li{% path_match "active" "view_next_day" %}><a href="{% url view_next_day %}">Завтра</a></li>
             <li{% path_match "active" "view_next_week" %}><a href="{% url view_next_week %}">На неделю</a></li>
             <li{% path_match "active" "randpage" %}><a href="{% url randpage %}">Мне повезет!</a></li>
+            <li{% path_match "active" "profiles_create_profile" %}><a href="{% url profiles_create_profile %}">profiles_create_profile</a></li>
+            <li{% path_match "active" "profiles_edit_profile" %}><a href="{% url profiles_edit_profile %}">profiles_edit_profile</a></li>
+
             {% if user.is_authenticated %}
             <li{% path_match "active" "add_event" %}>
             <a href="{% url add_event %}">Добавить событие</a></li>

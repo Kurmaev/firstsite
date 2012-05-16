@@ -18,7 +18,7 @@ urlpatterns = patterns('django.contrib.auth.views',
 )
 
 urlpatterns += patterns('',
-
+    url(r'^profiles/', include('profiles.urls')),
     url(r'^accounts/register/$', 'registration.views.register', 
         {'backend': 'registration.backends.default.DefaultBackend', 
         'form_class': RegistrationFormUniqueEmail},
@@ -29,7 +29,7 @@ urlpatterns += patterns('',
     url(r'^view-rand/$', 'firstsite.views.randpage', {},'randpage'),
 
     url(r'^images/(?P<path>.*)$', 'django.views.static.serve', 
-	    {'document_root': settings.MEDIA_PIC}),
+        {'document_root': settings.MEDIA_PIC}),
 
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^events/', include('event.urls')),

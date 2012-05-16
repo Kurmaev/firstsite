@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     'event',
     'south',
     'bootstrap_toolkit',
-
+    'profiles'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -172,6 +172,8 @@ LOGGING = {
         },
     }
 }
+
+AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 
 LOGIN_REDIRECT_URL = '/'
 
