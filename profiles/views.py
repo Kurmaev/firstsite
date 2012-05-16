@@ -181,13 +181,7 @@ def edit_profile(request, form_class=None, success_url=None,
         profile_obj = request.user.get_profile()
     except ObjectDoesNotExist:
         return HttpResponseRedirect(reverse('profiles_create_profile'))
-    
-    #
-    # See the comment in create_profile() for discussion of why
-    # success_url is set up here, rather than as a default value for
-    # the argument.
-    #
-    
+
     if success_url is None:
         success_url = reverse('profiles_profile_detail',
                               kwargs={ 'username': request.user.username })
@@ -197,7 +191,6 @@ def edit_profile(request, form_class=None, success_url=None,
         form = form_class(data=request.POST, files=request.FILES,
                             instance=profile_obj)
 
-        print form.base_fields.keyOrder
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(success_url)
