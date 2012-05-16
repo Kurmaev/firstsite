@@ -195,12 +195,14 @@ def edit_profile(request, form_class=None, success_url=None,
         form_class = utils.get_profile_form()
     if request.method == 'POST':
         form = form_class(data=request.POST, files=request.FILES, instance=profile_obj)
+
+        print form.base_fields.keyOrder
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(success_url)
     else:
         form = form_class(instance=profile_obj)
-    
+
     if extra_context is None:
         extra_context = {}
     context = RequestContext(request)

@@ -128,9 +128,9 @@ INSTALLED_APPS = (
     'registration',
     'login_user',    
     'event',
-    'south',
     'bootstrap_toolkit',
-    'profiles'
+    'profiles',
+    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
