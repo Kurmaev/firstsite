@@ -28,13 +28,13 @@ urlpatterns += patterns('',
 
     url(r'^view-rand/$', 'firstsite.views.randpage', {},'randpage'),
 
-    url(r'^images/(?P<path>.*)$', 'django.views.static.serve', 
-        {'document_root': settings.MEDIA_PIC}),
-
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^events/', include('event.urls')),
     (r'^', include('event.urls')),
 )
-
-urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += patterns('',
+        url(r'^images/(?P<path>.*)$', 'django.views.static.serve', 
+            {'document_root': settings.MEDIA_PIC}),)
 

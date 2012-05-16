@@ -192,3 +192,8 @@ try:
     from local_settings import *
 except:
     pass
+
+try:
+    from dev_settings import *
+except:
+    pass
