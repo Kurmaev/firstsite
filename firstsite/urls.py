@@ -24,6 +24,8 @@ urlpatterns += patterns('',
         'form_class': RegistrationFormUniqueEmail},
         name="registration_unique_mail"),
 
+    url(r'', include('social_auth.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^view-rand/$', 'firstsite.views.randpage', {},'randpage'),

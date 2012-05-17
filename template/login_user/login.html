@@ -19,5 +19,13 @@ Login
         {{form.as_p}}
         <input type="submit" value="Log In" />
         </form>
+    <ul>
+      <li>
+        <a href="{% url socialauth_begin 'twitter' %}">Enter using Twitter</a>
+      </li>
+      <li>
+        <a href="{% url socialauth_begin 'facebook' %}">Enter using Facebook</a>
+      </li>
+    </ul>
     {% endif %}
 {% endblock %}

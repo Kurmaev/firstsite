@@ -119,6 +119,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'django.contrib.auth',
+    'social_auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -174,6 +175,15 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+FACEBOOK_APP_ID              = '351153011617699'
+FACEBOOK_API_SECRET          = 'fe2eb759b3d4b5805a004d2ee2aac263'
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 LOGIN_REDIRECT_URL = '/'
 
