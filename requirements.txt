@@ -6,3 +6,7 @@ pytils==0.2.3
 mysql-python==1.2.3
 django-bootstrap-toolkit==2.5.3
 lxml==2.3
+oauth2==1.5.211
+python-openid==2.2.5
+django-social-auth==0.6.9
+
