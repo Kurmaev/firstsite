@@ -3,6 +3,7 @@ from django.db import models
 from pytils.translit import slugify
 import datetime
 from lxml.html.clean import Cleaner
+from django.db.models.signals import post_save
 
 class Category(models.Model):
     shortname = models.CharField(max_length=10, unique=True)
@@ -59,3 +60,10 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.name
+
+def drop_cache(sender, instance, created, **kwargs):
+    if created:
+        from django.core.cache import cache
+        cache.clear()
+
+post_save.connect(drop_cache, sender=Event)

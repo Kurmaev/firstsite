@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.views.decorators.cache import cache_page
+from event.views import view_today
 
 urlpatterns = patterns('event.views',
 
@@ -8,12 +10,13 @@ urlpatterns = patterns('event.views',
 
     url(r'^view-next-week/$', 'view_next_week', name="view_next_week"),
 
-    url(r'^$', 'view_today', name="view_today"),
+#    url(r'^$', cache_page(15)(view_today), name="view_today"),
+    url(r'^$', view_today, name="view_today"),
 
     url(r'^view-all/$', 'viewall', name="view_all_cat"),
 
     url(r'^more/(?P<event_slug>[-_\w]+)/$', 'view_more_about_event',
-	    name="view_more"),
+        name="view_more"),
 
     url(r'^add_event/$', 'add_event', name="add_event"),
     url(r'^search/$', 'search', name="search_event"),

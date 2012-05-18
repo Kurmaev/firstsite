@@ -26,3 +26,5 @@ DATABASES = {
         'TEST_CHARSET': 'utf8'
     }
 }
+
+

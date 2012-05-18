@@ -23,6 +23,20 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': '/djcode/redis.sock',
+        'KEY_PREFIX': 'event',
+        'OPTIONS': {
+            'DB': 0,
+#            'PASSWORD': 'yadayada',
+#            'PARSER_CLASS': 'redis.connection.HiredisParser' based on C ?
+            'PARSER_CLASS': 'redis.connection.PythonParser'
+        },
+    },
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -101,6 +115,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -116,10 +131,9 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(MY_SETTINGS_PATH,'..','template')
 )
-
+INTERNAL_IPS = ('127.0.0.1', '127.0.0.1:8000',)
 INSTALLED_APPS = (
     'django.contrib.auth',
-    'social_auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -127,11 +141,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'registration',
-    'login_user',    
+    'login_user',
     'event',
     'bootstrap_toolkit',
     'profiles',
     'south',
+    'debug_toolbar',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -175,15 +190,7 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
-AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
-FACEBOOK_APP_ID              = '351153011617699'
-FACEBOOK_API_SECRET          = 'fe2eb759b3d4b5805a004d2ee2aac263'
-FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -196,6 +203,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
+)
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
 )
 
 try:

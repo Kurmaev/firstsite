@@ -9,9 +9,32 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from event.utils import getPage
 from django.db.models import Q
+from django.core.cache import cache
 
 today = datetime.date.today()
 
+def cache_this(func):
+    def wrapped(*args, **kwargs):
+        request = args[0]
+        key =  getattr(request, 'path_info') 
+        i = getattr(request, 'GET').get('page','')
+#        if getattr(request, 'user').is_authenticated():
+#            key = ''.join(('a:',key))
+#        else:
+#            key = ''.join(('n:',key))
+        if i:
+            key = ''.join((key,'page',i))
+        cache_page = cache.get(key, '')
+        if cache_page:
+            return cache_page
+        else:
+            i = func(*args, **kwargs)
+            x1 = i.render()
+            cache.set(key, x1, 24*60*60)
+            return i
+    return wrapped
+
+@cache_this
 def view_events_from_cat(request, sort, template_name='main/events.html'):
     p = get_object_or_404(Category, shortname=sort)
     list_events = Event.objects.filter(category=p).filter(date_end__gte=today)
@@ -20,6 +43,7 @@ def view_events_from_cat(request, sort, template_name='main/events.html'):
         {'list_events':getPage(request, list_events, 6), 
         'state':' '.join((u"Категория ", p.rusname))})
 
+@cache_this
 def viewall(request, template_name='main/events.html'):
     list_events = Event.objects.order_by('date_start').filter(date_end__gte=today)
 
@@ -31,6 +55,7 @@ def view_more_about_event(request, event_slug,
     p = get_object_or_404(Event, slug=event_slug)
     return TemplateResponse(request,template_name, {'event':p})
 
+@cache_this
 def view_next_day(request, template_name='main/events.html'):
     next_day = today + datetime.timedelta(1)
     list_events = Event.objects.filter(date_start__lte=next_day)
@@ -40,6 +65,7 @@ def view_next_day(request, template_name='main/events.html'):
         {'list_events':getPage(request, list_events, 6), 
         'state':"События на завтра",})
 
+@cache_this
 def view_today(request, template_name='main/events.html'):
     list_events = Event.objects.filter(date_start__lte=today)
     list_events = list_events.filter(date_end__gte=today)
@@ -48,6 +74,7 @@ def view_today(request, template_name='main/events.html'):
         {'list_events':getPage(request, list_events, 6), 
         'state':"Сегодня можно посетить",})
 
+@cache_this
 def view_next_week(request, template_name='main/events.html'):
     next_week = today + datetime.timedelta(7)
     list_events = Event.objects.filter(Q(date_start__range=(today,next_week))|\
