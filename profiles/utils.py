@@ -5,7 +5,7 @@ site-specific user profile model specified in the
 ``AUTH_PROFILE_MODULE`` setting.
 
 """
-
+from django.contrib.auth.models import User
 from django import forms
 from django.conf import settings
 from django.db.models import get_model
