@@ -131,7 +131,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(MY_SETTINGS_PATH,'..','template')
 )
-INTERNAL_IPS = ('127.0.0.1', '127.0.0.1:8000',)
+INTERNAL_IPS = ('127.0.0.1', '127.0.0.1:8000', '91.230.247.80:11180','91.230.247.80')
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

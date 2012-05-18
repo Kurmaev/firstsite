@@ -3,11 +3,12 @@ South==0.7.4
 django-registration==0.8.0
 PIL==1.1.7
 pytils==0.2.3
-mysql-python==1.2.3
+mysql-python>=1.2.3
 django-bootstrap-toolkit==2.5.3
-lxml==2.3
+lxml>=2.3
 oauth2==1.5.211
 python-openid==2.2.5
 django-social-auth==0.6.9
-django-redis-cache>=0.9.4
-redis>=2.4.12
+django-redis-cache==0.9.4
+redis==2.4.12
+django-debug-toolbar==0.9.4

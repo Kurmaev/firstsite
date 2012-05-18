@@ -11,7 +11,7 @@ urlpatterns = patterns('event.views',
     url(r'^view-next-week/$', 'view_next_week', name="view_next_week"),
 
 #    url(r'^$', cache_page(15)(view_today), name="view_today"),
-    url(r'^$', view_today, name="view_today"),
+    url(r'^$', 'view_today', name="view_today"),
 
     url(r'^view-all/$', 'viewall', name="view_all_cat"),
 
