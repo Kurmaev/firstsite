@@ -10,6 +10,9 @@
     {% block styles %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
     {% block scripts %}{% endblock %}
   </head>
 {% endcache %}
@@ -25,8 +28,6 @@
             <li{% path_match "active" "view_next_day" %}><a href="{% url view_next_day %}">Завтра</a></li>
             <li{% path_match "active" "view_next_week" %}><a href="{% url view_next_week %}">На неделю</a></li>
             <li{% path_match "active" "randpage" %}><a href="{% url randpage %}">Мне повезет!</a></li>
-            <li{% path_match "active" "profiles_create_profile" %}><a href="{% url profiles_create_profile %}">profiles_create_profile</a></li>
-            <li{% path_match "active" "profiles_edit_profile" %}><a href="{% url profiles_edit_profile %}">profiles_edit_profile</a></li>
 
             {% if user.is_authenticated %}
             <li{% path_match "active" "add_event" %}>
@@ -42,7 +43,16 @@
           <ul class="nav pull-right">
             <li class="divider-vertical"></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url user_logout %}">Logout</a></li>
+            <ul class="nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Привет, {{ user }}! <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href={% url profiles_edit_profile %}>Редактировать профиль</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url user_logout %}">Logout</a></li>
+              </ul>
+            </li>
+              </ul>
             {% else %}
             <li{% path_match "active" "user_login" %}><a href="{% url user_login %}">Login</a></li>
             {% endif %}

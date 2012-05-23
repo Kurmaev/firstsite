@@ -2,14 +2,14 @@
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}datepicker/styles/datePicker.css">
+<link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}wysiwyg/jquery.wysiwyg.css">
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/date.js"></script>
 <!--[if IE]><script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.bgiframe.min.js"></script><![endif]-->
 <script type="text/javascript" src="{{ STATIC_URL }}datepicker/scripts/jquery.datePicker.js"></script>
-
+<script type="text/javascript" src="{{ STATIC_URL }}wysiwyg/jquery.wysiwyg.js"></script>
 <script type="text/javascript" charset="utf-8">
     $(function()
     {
@@ -17,6 +17,11 @@
     });
 </script>
 
+<script type="text/javascript">
+$(function() {
+    $('#id_text').wysiwyg();
+});
+</script>
 {% endblock %}
 
 {% block content %}
