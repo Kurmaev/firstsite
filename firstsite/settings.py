@@ -131,7 +131,14 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(MY_SETTINGS_PATH,'..','template')
 )
-INTERNAL_IPS = ('127.0.0.1', '127.0.0.1:8000', '91.230.247.80:11180','91.230.247.80')
+
+#mini hack for displaying debug_toolbar for all ip's
+class glob_list(list):
+    def __contains__(self, key):
+        return True
+
+INTERNAL_IPS = glob_list(['',])
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -151,14 +158,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-ACCOUNT_ACTIVATION_DAYS = 7
-AUTH_USER_EMAIL_UNIQUE = True
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'info@google.ru'
+#
+#Registration setting move into developers settings
+#
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
