@@ -1,15 +1,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
+{% load cache %}
+{% cache 86400 header request.path_info request.META.QUERY_STRING %}
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>
-    {% block header %}Event's site{% endblock %}   
+    {% block header %}Event's site{% endblock %}
     </title>
     {% block styles %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
     {% block scripts %}{% endblock %}
   </head>
+{% endcache %}
   <body>
         {% load mytag %} 
   <div class="navbar">
@@ -51,13 +54,15 @@
 
   <div class="row-fluid show-grid">
     <div class="span3">
+    {% cache 86400 sidebar %}
     {% show_category %}
+    {% endcache %}
     </div>
 
     <div class="span6">
     {% block content %}{% endblock %}
     </div>
-
+{% cache 86400 footer %}
     <div class="span3">
         <br>
     </div>
@@ -69,5 +74,6 @@
   <div class="footer">
   <h4>&copy; Company 2012</h4>
   </div>
+{% endcache %}
   </body>
 </html>

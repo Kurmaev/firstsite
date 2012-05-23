@@ -1,11 +1,13 @@
 {% extends "main/base.html" %}
-
+{% load cache %}
 {% block header %}
 {{ state }}
 {% endblock %}
 
 {% block content %}
+{% cache 86400 event request.path_info request.META.QUERY_STRING %}
 <h2>{{ state }}</h2>
+
 {% if list_events %}
 
 {% include "main/show_short_event.html" with list_events=list_events %}
@@ -13,5 +15,6 @@
 {% else %}
 <br> <p>Событий нет!</p> 
 {% endif %}
-
+{% endcache %}
 {% endblock %}
+
