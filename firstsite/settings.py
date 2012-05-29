@@ -26,7 +26,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': '/djcode/redis.sock',
+        'LOCATION': '/djcode/redis6379.sock',
         'KEY_PREFIX': 'event',
         'OPTIONS': {
             'DB': 0,
