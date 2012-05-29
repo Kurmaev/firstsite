@@ -1,6 +1,7 @@
 from django import template
 from event.models import Category
-
+from lxml import etree
+from StringIO import StringIO
 register = template.Library()
 from django.core.urlresolvers import reverse, resolve
 
@@ -28,6 +29,10 @@ def cut(text, len_):
     Cut text to allowed lenght
     """
     if len(text)>len_:
-        return '...'.join((text[:len_],''))
+        parser = etree.HTMLParser()
+        broken_html = '...'.join((text[:len_],''))
+        tree = etree.parse(StringIO(broken_html), parser)
+        str_t = etree.tostring(tree.getroot(), pretty_print=True, method="html")
+        return str_t
     else:
-        return text[:len_]
+        return text
