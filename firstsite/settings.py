@@ -1,5 +1,7 @@
 # Django settings for firstsite project.
 import os
+import djcelery
+djcelery.setup_loader()
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -153,6 +155,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'profiles',
     'south',
+    'djcelery',
     'debug_toolbar',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -191,6 +194,12 @@ LOGGING = {
     }
 }
 
+BROKER_HOST = "localhost"
+BROKER_PORT = 5672
+BROKER_USER = "djangouser"
+BROKER_PASSWORD = "pass28577"
+BROKER_VHOST = "rabbit_host"
+
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 
 
@@ -218,6 +227,8 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
 )
+
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
 try:
     from local_settings import *
