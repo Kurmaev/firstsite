@@ -18,6 +18,8 @@ urlpatterns = patterns('django.contrib.auth.views',
 )
 
 urlpatterns += patterns('',
+    url(r'^test/$', 'firstsite.views.testpage'),
+    url(r'^ajax/$', 'firstsite.views.ajaxpage'),
     url(r'^profiles/', include('profiles.urls')),
     url(r'^accounts/register/$', 'registration.views.register', 
         {'backend': 'registration.backends.default.DefaultBackend', 

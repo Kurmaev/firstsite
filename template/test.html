@@ -1,0 +1,161 @@
+<!--<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>
+    Test page
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test/main.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}test/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}test/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready( function(){
+        $('#ra').click(function(){                    
+          var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
+          var date = '{"y":'+date_arr[2]+', "m":"'+date_arr[1]+'", "d":'+date_arr[0]+', "o": 1}';
+
+                $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],o:1}, function(json){
+                  $('#date_time')[0].innerHTML = json['date'];
+                  $('.big_num')[0].innerHTML = json['big_num'];
+                  $('#weekday')[0].innerHTML = json['weekday'];
+                  $('#month_year')[0].innerHTML = json['month_year'];
+          });
+        });
+        $('#la').click(function(){                    
+          var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
+          var date = '{"y":'+date_arr[2]+', "m":"'+date_arr[1]+'", "d":'+date_arr[0]+', "o": -1}';
+                $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],o:-1}, function(json){
+                  $('#date_time')[0].innerHTML = json['date'];
+                  $('.big_num')[0].innerHTML = json['big_num'];
+                  $('#weekday')[0].innerHTML = json['weekday'];
+                  $('#month_year')[0].innerHTML = json['month_year'];
+          });
+        });
+      });
+</script>
+  </head>
+  <body>
+  <div id="maket">
+  <div class="navbar ">
+    <div class="navbar-inner">
+      <div class="container">
+        <a href="/" class="brand">Event's site</a>
+        <div style="float:left">
+        <div class="nav-collapse">
+          <div>
+          <ul class="nav" >
+            <li><a href="{% url view_today %}">Home</a></li>
+            <li><a href="{% url view_next_day %}">Завтра</a></li>
+            <li><a href="{% url view_next_week %}">На неделю</a></li>
+            <li><a href="{% url randpage %}">Мне повезет!</a></li>  
+            <li><a href="{% url registration_unique_mail %}">Регистрация</a></li>
+          <form action="{% url search_event %}" class="navbar-search pull-left">
+            <input type="text" name="query" placeholder="Search" class="search-query span2">
+          </form>
+          </ul>
+          <div style="float:right">
+          <ul class="nav pull-right">
+            <li class="divider-vertical"></li>
+            <ul class="nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Привет, {{ user }}! <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href={% url profiles_edit_profile %}>Редактировать профиль</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url user_logout %}">Logout</a></li>
+              </ul>
+            </li>
+            </ul>
+            </div>
+          </div>
+          </div>
+          <div  style="clear: both;">
+          <ul class="nav">
+            <li><a href="{% url view_today %}">Кино</a></li>
+            <li><a href="{% url view_next_day %}">Театры</a></li>
+            <li><a href="{% url view_next_week %}">Концерты</a></li>
+            <li><a href="{% url randpage %}">Выставки</a></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- navbar -->
+  <div class="row-fluid show-grid backgr center-block">
+  
+    <div class="nav-block">
+      <div style="padding-top:80px;text-align:right;">
+      <ul class="nav nav-list">
+        <li class="nav-header">Показать:</li>
+        <li class="active">
+        <a href="#">День</a>
+        </li>
+        <li><a href="#">Месяц</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div id="calendar_data" class="event-block">
+        <div style="text-align:center;padding-left:55px;padding-right:55px;">  
+          <div id="date">
+            <div id="la" class="arrow_left">      </div>
+            <div id="ra" class="arrow_right">     </div>
+            <div style="width=70%; margin: auto;">
+              <div style="width=70% height:40px; margin: auto; display:block;">
+              <div id="date_time">22 января 2001 г.</div>
+              <div id="date_event"> События! </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="dates">  
+          <div class="big_num">29</div>
+          <div id="weekday">Суббота</div>
+          <div id='month_year'>Июнь 2012</div>
+        </div>
+        
+        <div id="calendar_data_2" class="events">  
+          <div id="news" >
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div> -->
+          </div>
+        </div>
+    </div>
+  </div>
+  <div id="rasporka"></div>
+  </div>
+  <div class="footer">
+  <h4>&copy; Company 2012</h4>
+  </div>
+  </body>
+</html>

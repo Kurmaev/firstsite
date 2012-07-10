@@ -1,0 +1,256 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+	text-align:center;
+/*	color: #333333;
+	background-color: #ffffff;*/
+	width:100%;
+	color: #0088CC;
+	
+
+}
+#maket{
+	width:100%;
+	min-width:1004px;
+	min-height:100%;
+	background:#151618;
+	background:-moz-linear-gradient(center top , #151618 0%, #999999 100%) repeat scroll 0 0 transparent; 
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#151618), color-stop(100%,#999999));
+	background:-webkit-linear-gradient(top, #151618 0%,#999999 100%);
+	background:-o-linear-gradient(top, #151618 0%,#999999 100%);
+	background:-ms-linear-gradient(top, #151618 0%,#999999 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#151618', endColorstr='#999999',GradientType=0 );
+	background:linear-gradient(top, #151618 0%,#999999 100%);
+}
+
+#rasporka {
+height: 50px;
+}
+
+html{ 	
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+
+
+	}
+
+ul,
+ol {
+	padding: 0;
+	margin: 0 0 9px 0px;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+	margin-bottom: 0;
+}
+.leftimg {
+	float:left; /* Выравнивание по левому краю */
+	margin: 7px 7px 7px 0px; /* Отступы вокруг картинки */
+}
+
+.today {
+	background-color: #F8F8FF;
+	padding: 10px
+}
+/*.footer{
+	padding-top:20px;
+	padding-bottom:20px;
+	
+	display:block;
+	text-align:left;
+	background-color: #BFBFBF;
+	position: relative;
+	bottom: 0px;
+	width: 100%;
+}
+.footer h4{
+	margin-left:20px;
+}*/
+.footer{
+border-top:3px solid white;
+background-color:#BFBFBF;
+clear:both;
+padding-top:20px;
+padding-bottom:20px;
+margin-top:-63px;
+width: 100%;
+}
+
+input, textarea, select, .uneditable-input {
+    width: 450px;
+}
+.arrow_right{
+	z-index: 10;
+	float:right;
+	background: url('arr4.png') no-repeat scroll right center ;
+	cursor: pointer;
+	height: 50px;
+	width: 55px;
+	background-position: -55px;
+	margin-right: -55px;
+	margin-top: -17px;
+	}
+	
+.arrow_left{
+	float:left;
+	background: url('arr4.png') no-repeat scroll right center ;
+	cursor: pointer;
+	height: 50px;
+	width: 55px;
+	background-position: 0px;
+	margin-left: -55px;
+	margin-top: -17px;
+	z-index: 10;
+	}
+
+.arrow_right:focus{
+	height: 30px;
+	}
+		
+.event {
+	display:block;
+	clear:both;
+	overflow: hidden; 
+	text-align: left; 
+}
+.event img{
+	float:left; 
+	margin: 7px 7px 7px 0px; 
+	width: 100px;
+	
+}
+
+.navbar .nav > li > a {
+	color: #0088CC;
+}
+
+.navbar {
+	margin-bottom: 0px;
+	display: inline;
+	text-align:center;
+}
+
+.navbar .container {
+    width: 970px;
+}
+
+.center{
+	text-align:center;
+}
+
+p {
+	font-size: 14px;
+}
+
+.clear { clear: both; }
+
+
+div.event a{
+	text-decoration: underline;
+	font-size: 20px;
+}
+
+
+.big_num {
+	margin-top:70px;
+	height:50px;
+	margin-bottom:10px;
+
+	font-size: 90px;
+}
+
+
+div#calendar_data{
+    margin-top: 35px;
+    color: white;
+    
+}
+
+div#calendar_data_2 {
+    margin-top: 35px;
+    color: white;
+    }
+
+div#date {
+	text-align:center;
+	display:block;
+	margin-top:auto;
+	margin-bottom:auto;
+
+}
+
+div#date_event {
+	font-size: 24px;
+	height: 100px;
+	display:inline;
+	color: white;
+}
+div#date_time {
+	padding-top:20px;
+	font-size: 24px;
+	height: 100px;
+	display:inline;
+	color: white;
+}
+.center-block .nav-block li{
+	padding-bottom:5px;
+	padding-top:5px;
+}
+.nav .nav-header {
+	text-transform:inherit;
+}
+.center-block .nav-block .nav-header{
+	font-size: 1.2em;
+}
+
+.center-block .nav-block{
+	float:left;
+	width:170px;
+	font-size:1.2em;
+	margin-left:0px;
+	margin-right:10px;
+}
+.center-block .event-block{
+	float:left;
+	width:740px;
+	margin-left:10px;
+	margin-right:0px;
+}
+.center-block .event-block .dates{
+	float:left;
+	width:130px;
+	margin-left:0px;
+	margin-right:10px;
+}
+.center-block .event-block .events{
+	float:left;
+	width:590px;
+	margin-left:10px;
+	margin-right:0px;
+}
+.center-block{
+	margin:auto;
+	width:930px;
+	text-align: center;
+	padding-bottom:63px;
+	
+}
+
+.nav-list > li > a, .nav-list .nav-header {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.9);
+}
+
+hr {
+	margin-bottom:0px;
+}
+a {
+	color: white;
+}
