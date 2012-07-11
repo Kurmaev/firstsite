@@ -52,6 +52,7 @@ ol ul {
 	margin-bottom: 0;
 }
 .leftimg {
+	width:200px;
 	float:left; /* Выравнивание по левому краю */
 	margin: 7px 7px 7px 0px; /* Отступы вокруг картинки */
 }
@@ -253,4 +254,30 @@ hr {
 }
 a {
 	color: white;
+}
+
+
+#has_next{
+	z-index: 10;
+	background: url('arr4.png') no-repeat scroll right center ;
+	cursor: pointer;
+	height: 50px;
+	width: 55px;
+	background-position: -55px;
+	display: block;
+	float:right;
+	}
+	
+#has_prev{
+	background: url('arr4.png') no-repeat scroll right center ;
+	cursor: pointer;
+	height: 50px;
+	width: 55px;
+	background-position: 0px;
+	z-index: 10;
+	display: block;
+	float:left;
+	}
+#arrows{
+	padding: 0 40%;
 }

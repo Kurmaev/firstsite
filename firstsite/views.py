@@ -7,6 +7,7 @@ from event.models import Event
 import datetime
 from django.http import HttpResponse
 import json
+from event.utils import getPage
 
 def randpage(request):
     today = datetime.date.today()
@@ -45,14 +46,30 @@ def ajaxpage(request):
     date = int(request.GET['d'])
     mon = decode_month[request.GET['m']]
     year = int(request.GET['y'])
-    offset = int(request.GET['o'])
+    offset = int(request.GET.get('o', 0 ))
     zz =  datetime.date(year, mon, date)
-    new_zz = zz + datetime.timedelta(days=offset)
+    
+    if offset:
+      new_zz = zz + datetime.timedelta(days=offset)
+    else:
+      new_zz = zz
+    
+    print new_zz
+    obj = Event.objects.filter(date_start__lte=new_zz).filter(date_end__gte=new_zz)
+
+    obj = getPage(request, obj, 5)
+    
+    rez_obj = []
+    for i in obj.object_list:
+      rez_obj.append([i.name, i.text[:1000], i.slug,i.picture.url])
+    
+
     
     week = weekday[new_zz.weekday()];
     month_year = u"%s %s" % (encode_month[new_zz.month], new_zz.year)
     date = u"%s %s %s г." % (new_zz.day, encode_months[new_zz.month], new_zz.year)
-    text = {'weekday': week,'month_year':month_year,'date':date,'big_num':new_zz.day}
+    text = {'weekday': week,'month_year':month_year,'date':date,'big_num':new_zz.day,'page':obj.number, 'has_next':obj.has_next(), 'has_previous':obj.has_previous(), 'objects':rez_obj}
+
 
     return HttpResponse(json.dumps(text), content_type="application/json")
 
