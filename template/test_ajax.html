@@ -1,0 +1,55 @@
+        <div style="text-align:center;padding-left:55px;padding-right:55px;">  
+          <div id="date">
+            <div id="la" class="arrow_left">      </div>
+            <div id="ra" class="arrow_right">     </div>
+            <div style="width=70%; margin: auto;">
+              <div style="width=70% height:40px; margin: auto; display:block;">
+              <div id="date_time">{{ date }}</div>
+              <div id="date_event">  Событий: {{ len }}</div>
+             </div>
+           </div>
+           <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="dates">  
+          <div class="big_num">{{ big_num }}</div>
+          <div id="weekday">{{ weekday }}</div>
+          <div id='month_year'>{{ month_year }}</div>
+        </div>
+        
+        <div id="calendar_data_2" class="events">  
+          <!--парсим лист объектов-->
+          <div id="news" >
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div>
+            <div class="event">
+              <img src="{{ STATIC_URL }}test/1.jpg">
+              <div><a href="#">Не выставка в Генерал-Губернаторском дворце</a></div>
+            </div> 
+          </div>
+        </div>
+
+

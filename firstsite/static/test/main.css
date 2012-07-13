@@ -16,6 +16,7 @@ body {
 }
 #maket{
 	width:100%;
+	position:absolute;
 	min-width:1004px;
 	min-height:100%;
 	background:#151618;
@@ -28,9 +29,6 @@ body {
 	background:linear-gradient(top, #151618 0%,#999999 100%);
 }
 
-#rasporka {
-height: 50px;
-}
 
 html{ 	
 	margin: 0px;
@@ -76,13 +74,16 @@ ol ul {
 	margin-left:20px;
 }*/
 .footer{
-border-top:3px solid white;
-background-color:#BFBFBF;
-clear:both;
-padding-top:20px;
-padding-bottom:20px;
-margin-top:-63px;
-width: 100%;
+	position:absolute;
+	bottom:0px;
+	border-top:3px solid white;
+	background-color:#BFBFBF;
+	clear:both;
+	padding-top:20px;
+	padding-bottom:20px;
+	margin-top:-63px;
+	width: 100%;
+	min-width: 1004px;
 }
 
 input, textarea, select, .uneditable-input {
@@ -117,16 +118,30 @@ input, textarea, select, .uneditable-input {
 	}
 		
 .event {
+	float:left;
 	display:block;
-	clear:both;
+	/*clear:both;*/
 	overflow: hidden; 
 	text-align: left; 
+	margin:10px 3px 3px;
+	max-width: 173px;
+	height: 310px;
 }
-.event img{
-	float:left; 
-	margin: 7px 7px 7px 0px; 
-	width: 100px;
+
+.event_tumb {
+	overflow: hidden; 
+	max-width: 173px;
+	height: 250px;
+}
+
+.event_tumb img{
+	margin:auto;
+	border:3px solid white;
+	width: 167px;
 	
+}
+#news .event a{
+	font-size:18px;
 }
 
 .navbar .nav > li > a {
@@ -225,7 +240,7 @@ div#date_time {
 	margin-left:10px;
 	margin-right:0px;
 }
-.center-block .event-block .dates{
+.center-block .event-block #dates{
 	float:left;
 	width:130px;
 	margin-left:0px;
@@ -279,5 +294,57 @@ a {
 	float:left;
 	}
 #arrows{
+	min-width:115px;
 	padding: 0 40%;
+}
+
+table#table {
+	display:table; 
+	text-align:center; 
+	vertical-align:middle;
+	border-collapse: separate;
+	border-spacing: 2px;
+	border-color: red;
+	}
+
+table#table th {
+	font-size: 12px;
+}
+
+table#table td {
+	background-color:gray;
+	min-width: 100px;
+	min-height: 100px;
+	width: 100px;
+	height: 100px;
+	font-size: 12px;
+	color: white;
+	vertical-align: baseline;
+}
+
+table#table td div{
+	font-size:30px;
+	text-align:right;
+	margin:20px;
+}
+
+table#table td div.count{
+	display:inline;
+	vertical-align:baseline;
+	font-size:16px;
+	margin-bottom:20px;
+	height: 30px;
+	/*border-top-left-radius: 10px;*/
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-color: #6EBF17;
+	font-weight: bold;
+	text-align: center;
+	padding: 3px 11px 3px 11px;
+	margin: 0px;
+}
+
+table#table td.gray{
+	background-color: transparent;
 }

@@ -7,7 +7,6 @@
     </title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test/main.css">
-    <script type="text/javascript" src="{{ STATIC_URL }}test/cooker.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}test/jquery.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}test/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}test/bootstrap-button.js"></script>
@@ -34,22 +33,72 @@
         };
 
 
-        var page = 1;
-        var date_time = $('#date_time')[0];
-        var date_event = $('#date_event')[0];
-        var big_num = $('.big_num')[0];
-        var weekday = $('#weekday')[0];
-        var month_year = $('#month_year')[0];
+        var page = 1; //Текущая страница по номеру (используется в паджинации)
+        var mode = 0; // 0 - День, 1 - Календарь. Поменять на 0 по умолчанию, прикрутить эвент смены режима
+
+        // для показа / скрытия месяц/день
+        var dates = $('#dates');
+        var calendar_data_2 = $('#calendar_data_2');
+        var table = $('#table'); 
+
+        if (mode){
+          dates.css({display:'none',});
+          calendar_data_2.css({display:'none',});
+          table.css({display:'table',});
+          }
+        else{
+          dates.css({display:'block',});
+          calendar_data_2.css({display:'block',});
+          table.css({display:'none',});
+        }
+
+        var date_time = $('#date_time');//! 
+        var date_event = $('#date_event');
+        var table_body = $('#table tbody');
+        var big_num = $('.big_num');//!
+        var weekday = $('#weekday');//!
+        var month_year = $('#month_year');//!
         var arr_has_prev = $('#has_prev');
         var arr_has_next = $('#has_next');
-        var news = $('#news')[0];
+        var news = $('#news');//!
         var path_to_view = "{% url view_more 'testname' %}".slice(0,-9);
         var array = [];
 
         {% if has_next %} {% else %}arr_has_next.css({display:'none',}){% endif %}
         {% if has_prev %} {% else %}arr_has_prev.css({display:'none',}){% endif %}
 
+        var arr_err = function(){ console.dir(arguments); } ;
         var arr_click = function(json){
+          if (mode) 
+          {
+            date_time[0].innerHTML = json['month_year']
+            date_event[0].innerHTML = 'Событий: '+json['count']
+            no_weekday = 0;
+            html = '<tr>';
+            console.log(json['objects'])
+            Array.prototype.slice.call(json['objects']).forEach(function(it, index){
+              html += '<td id="'+it[0]+'_'+it[1]+'_'+it[2]
+              if (it[3] == -1) { 
+                html += '" class="gray"><div>'+it[2]+'</div></td>'
+              }
+              else {
+                html += '"><div>'+it[2]+'</div><div class="count"> +'+it[3]+' </div></td>'
+              }
+
+              if (no_weekday == 6) { 
+                html += '</tr><tr>';
+                no_weekday = 0;
+              }
+              else{
+                no_weekday += 1;
+              }
+            });
+
+            html += '</tr>';
+            table_body[0].innerHTML = html;
+          }
+          else {
+
             date_time[0].innerHTML = json['date'];
             date_event[0].innerHTML = "Событий: "+json['len_obj'];
             big_num[0].innerHTML = json['big_num'];
@@ -85,60 +134,106 @@
             });
 
           };
+        };
 
-      $('#refresh').click(function(event, e){
-        if (e){
+      table_body.on('click', 'td', function(event){ 
+            id = event.currentTarget.id+"";
+            date = id.split('_')
+            $('#switch').trigger("click", [date[0],date[1],date[2]]);
+            event.stopPropagation()
+
+});
+
+      $('#refresh').click(function(event, manual_trigger, filter, year, month, day){
+        if (manual_trigger){
           var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
-          data = {d:date_arr[0],m:date_arr[1],y:date_arr[2],page:page, f:e};
+          data = {  d:day || date_arr[0],
+                    m: month || date_arr[1],
+                    y: year || date_arr[2],
+                    page:page, 
+                    f:filter, 
+                    mode:mode
+                  };
 
           $.ajax({
             url: '/ajax/',
             dataType: 'json',
             data: data,
             success: arr_click,
+            error: arr_err,
           });
         }
       event.stopPropagation()
       });
 
+        if (mode){
+
+          }
+        else{
+
+        }
+
+      $('#switch').click(function(event, year, month, day){
+        if (mode){ 
+          mode = 0; 
+          page = 1;
+          $('#refresh').trigger("click", [1,'', year, month, day || 1]);
+
+          dates.css({display:'block',});
+          calendar_data_2.css({display:'block',});
+          table.css({display:'none',});
+        } 
+        else { 
+          mode = 1; 
+          page = 1;
+          $('#refresh').trigger("click", [1,'']);
+
+          dates.css({display:'none',});
+          calendar_data_2.css({display:'none',});
+          table.css({display:'table',});
+        };
+      });
+
+
       $('#ra').click(function(){
         console.log('ra');
         var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
-        data = {d:date_arr[0],m:date_arr[1],y:date_arr[2],o:1,page:1};
+        data = {d:date_arr[0],m:date_arr[1],y:date_arr[2],o:1,page:1, mode:mode};
 
         $.ajax({
           url: '/ajax/',
           dataType: 'json',
           data: data,
           success: arr_click,
+          error: arr_err,
         });
         });
-
-      $('.cat').click(function(event){
-        console.log('cat')
-        event.stopPropagation();
-        console.log(this);
-        console.log(arguments);
-        });
-
 
       $('#la').click(function(){
-        console.log('la')
+        console.log('ra');
         var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
-        
-        $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],o:-1,page:1}, arr_click);
-      });
+        data = {d:date_arr[0],m:date_arr[1],y:date_arr[2],o:-1,page:1, mode:mode};
+
+        $.ajax({
+          url: '/ajax/',
+          dataType: 'json',
+          data: data,
+          success: arr_click,
+          error: arr_err,
+        });
+        });
+
 
       arr_has_prev.click(function(){
         console.log('has_prev')
         var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
-        $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],page:page-1}, arr_click);
+        $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],page:page-1, mode:0}, arr_click);
       });
 
       arr_has_next.click(function(){
         console.log('has_next')
         var date_arr = $('#date_time')[0].innerHTML.split(' '); //текущая дата
-        $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],page:page+1}, arr_click);
+        $.getJSON('/ajax/', {d:date_arr[0],m:date_arr[1],y:date_arr[2],page:page+1, mode:0}, arr_click);
       });
 
      });
@@ -151,7 +246,8 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a href="/" class="brand">Event's site</a>
+          <button id="switch" class="btn btn-inverse">Event's site</button>
+<!--          <a href="/" class="brand switch">Event's site</a>-->
           <div style="float:left">
           <div class="nav-collapse">
             <div>
@@ -200,9 +296,7 @@
         <div style="padding-top:80px;text-align:right;">
         <ul class="nav nav-list">
           <li class="nav-header">Показать:</li>
-          <li class="active">
-          <a href="#">День</a>
-          </li>
+          <li class="active"><a href="#">День</a></li>
           <li><a href="#">Месяц</a></li>
         </ul>
         </div>
@@ -222,7 +316,32 @@
             </div>
           </div>
 
-          <div class="dates">  
+          <table id='table' cellspacing="1" cellpadding="0" border="0">
+            <thead>
+              <tr>
+                <th>Понедельник</th>
+                <th>Вторник</th>
+                <th>Среда</th>
+                <th>Четверг</th>
+                <th>Пятница</th>
+                <th>Суббота</th>
+                <th>Воскресенье</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div>1</div><div class="count">+7</div></td>
+                <td><div>2</div><div class="count">+7</div></td>
+                <td><div>3</div><div class="count">+7</div></td>
+                <td><div>4</div><div class="count">+7</div></td>
+                <td><div>5</div><div class="count">+7</div></td>
+                <td><div>6</div><div class="count">+7</div></td>
+                <td><div>7</div><div class="count">+7</div></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div id="dates">  
             <div class="big_num">{{ big_num }}</div>
             <div id="weekday">{{ weekday }}</div>
             <div id='month_year'>{{ month_year }}</div>
@@ -249,6 +368,8 @@
               </div>
 
           </div>
+
+
       </div>
     </div>
 
